@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title> Relat&oacute;rios</title>
+		<link rel="stylesheet" href="{{ MEDIA_URL }}css/base.css" />
+
+
+	</head>
+	<body>
+		<div id='topo'>
+			<div id='logo'>
+				<img src="{{ MEDIA_URL }}/img/detransapp.png" alt='detransapp' width='100px'>
+				<div id='detransapp'>detransapp</div>
+				<div id='desc'>INSTITUTO DE TRÂNSITO E TRANSPORTE DE JOINVILLE</div>
+			</div>
+		</div>
+		<div id='menuHolder'>
+			<ul id='menu'>
+				<li> 
+					<a href='/'> Home </a>
+				</li>
+				<li> 
+					<a href='/cadastros.html'> Cadastros </a>
+				</li>
+				<li> 
+					<a href='/relatorios.html'> Relat&oacute;rios </a>
+				</li>
+			</ul>
+		</div>
+		<div id='conteudo'>
+			{% block result %}
+			{% endblock %}
+		</div>
+	</body>
+</html>

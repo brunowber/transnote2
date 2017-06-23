@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %} Relat&oacute;rio de Agentes {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+
+{% block result %}
+<div class='ui grid'>
+    <div class='row'>
+        <div class='three wide column'>
+        </div>
+        <div class='ten wide column'>
+            <h2 class='ui header'>
+                <i class="fa fa-user-secret icone"></i>Download de arquivo DET007
+                <div class='sub header'>Clique no botão abaixo e aguarde o download do arquivo.</div>
+
+            </h2>
+            <a href="/config/geradet"> <div class="ui verde button"> Download </div></a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

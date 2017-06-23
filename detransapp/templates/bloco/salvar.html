@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %} Cadastro de bloco {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item active{% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid'>
+    <div class='row'>
+        <div class='three wide column'></div>
+        <div class='ten wide column'>
+            {% if form.instance.id %}
+            <form method="POST" action="{% url 'cad-bloco' form.instance.id %}" class='ui form'>
+                {% else %}
+                <form method="POST" action="{% url 'cad-bloco' %}" class='ui form'>
+                    {% endif %}
+                    {% csrf_token %}
+                    <h2 class='ui header'>
+                        <i class="icon edit"></i>
+                        <div class="content">
+                            Cadastro de Bloco Mestre
+                            <div class='sub header'>Prencha os campos abaixo.</div>
+                        </div>
+                    </h2>
+                    <div class='field'>
+                        <label>In&iacute;cio Bloco</label>
+
+                        <div>
+                            {{ form.inicio_intervalo }}
+                            {% if form.inicio_intervalo.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.inicio_intervalo.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class='field'>
+                        <label>Fim Bloco</label>
+                        <div>
+                            {{ form.fim_intervalo }}
+                            {% if form.fim_intervalo.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.fim_intervalo.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class=' field'>
+                        <label>Ativo?</label>
+                        <div>
+                            {{ form.ativo }}
+                            {% if form.ativo.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.ativo.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+
+                    <div class='field'>
+                        <label> Número de Páginas por Bloco</label> 
+
+                        <div>
+                            {{ form.numero_paginas }}
+                            {% if form.numero_paginas.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.numero_paginas.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                     <div class='field'>
+                        <label> Número de Páginas Limite para reposição</label> 
+
+                        <div>
+                            {{ form.minimo_pag_restantes }}
+                            {% if form.minimo_pag_restantes.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.minimo_pag_restantes.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                                        
+
+
+
+                    <a href='/relatorios/'>
+                        <button type="button" class="ui cancel red button">Cancelar</button>
+                    </a>
+                    <button type="submit" class="ui verde button">Salvar</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

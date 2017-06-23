@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %} Relat&oacute;rio de Cor {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid relatorio'>
+    <div class='row'>
+        <div class='three wide column'>
+        </div>
+        <div class='ten wide column'>
+            <h2 class='ui header'>
+                <i class="paint brush icon"></i>
+                <div class="content">
+                    Relat&oacute;rio de Cor
+                    <div class='sub header'>Prencha os campos abaixo.</div>
+                </div>
+            </h2>
+            <div class="ui fluid form">
+                <form method="POST" action="{% url 'cor-consulta' %}">
+                    {% csrf_token %}
+                    <div class='field'>
+                        <label>Busca</label>
+                        <input type="text" name="procurar"/>
+                    </div>
+                    <button type="submit" class="ui verde button">Consultar</button>
+                </form>
+                <table class="ui table">
+                    <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>cor</th>
+                        <th>Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for cor in cores %}
+                    <tr>
+                        <td>{{ cor.codigo }}</td>
+                        <td>{{ cor.descricao }}</td>
+                        <td><a href="{% url 'cad-cor' cor.codigo %}"><i class='icon configure'></i>Editar</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% include "partials/paginacao.html" with lista=cores procurar=procurar %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

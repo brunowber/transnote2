@@ -1,0 +1,12 @@
+import agente
+import categoria
+import config_sinc
+import cor
+import especie
+import lei
+import modelo
+import tipo_infracao
+import tipo_veiculo
+import uf_cidade
+import veiculo
+import comprimir

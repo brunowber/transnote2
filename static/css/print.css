@@ -1,0 +1,12 @@
+header, footer#footer.ui.stackable.grid, a#print.ui.circular.icon.button.right.floated,
+a > button.ui.cancel.red.button, a > button.ui.verde.button, h2.ui.header {
+    display: none !important;
+}
+
+div.ui.segments{
+    display: block !important;
+}
+
+.ui.grid > .column:not(.row), .ui.grid > .row > .column {
+    font-size: 0.5rem !important;
+}

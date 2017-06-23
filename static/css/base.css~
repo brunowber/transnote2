@@ -1,0 +1,48 @@
+html{
+    background: -webkit-linear-gradient(rgb(5, 43, 0), rgb(5,93,18));
+    background: -o-linear-gradient(rgb(5, 43, 0), rgb(5,93,18));
+    background: -moz-linear-gradient(rgb(5, 43, 0), rgb(5,93,18));
+    background: linear-gradient(rgb(5, 43, 0), rgb(5,93,18));
+}
+body{
+    margin: 0 auto;
+    width: 66%;
+    background: #fff;
+    padding: 1.5%;
+    font-family: Verdana, Helvetica, sans-serif;
+}
+/*TOPO*/
+#ITTRAN{
+    font-size: 175%;
+}
+#desc{
+    width: 100px;
+    font-size: 46%;
+}
+/*MENU*/
+#menuHolder {
+    margin: 0px -3% 0 -3%;
+    font-size: 125%;
+    background: #E48C07;
+}
+#menu{
+    font-size: 125%;
+    padding: 1% 0 1% 0;
+}
+    #menu li {
+        display: inline;
+        padding: 1.05%;
+    }
+    #menu li:hover {
+        background: #000;
+    }
+        #menu li a {
+            text-decoration: none;
+            color: #fff;
+            padding: 10px;
+        }
+/*Relatórios*/
+#conteudo table{
+    margin: 0 auto;
+    width: 80%;
+}

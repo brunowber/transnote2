@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+{% block title %} Relat&oacute;rio de Infraç&otilde;es {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid relatorio'>
+    <div class='centered row'>
+        <div class='ten wide column'>
+            <a id="print" class="ui circular ui icon button right floated" href='javascript:window.print()'
+               rel="nofollow"
+               target="_blank">
+                <i class="fa fa-print"></i>
+                Imprimir
+            </a>
+
+            <h2 class="ui header">
+                <i class="browser icon"></i>
+                <div class="content">
+                    Detalhes Infração
+                    <div class="sub header">Visualizaçao do auto de infraçao.</div>
+                </div>
+            </h2>
+
+            <div class="ui segments">
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-tags icone"></i>
+                        <div class="content">
+                            1. IDENTIFICAÇÃO DA AUTUAÇÃO
+                        </div>
+                    </h3>
+                </div>
+                <div class="ui secondary segment">
+                    <div class="ui divided list">
+                        <div class="item">
+                            <label class="header label">CÓDIGO DO ÓRGÃO AUTUADOR:{{det.autuador}} </label>
+                        </div>
+                        <div class="item">
+                            <label class="header label">N° AIT: {{infracao.id}}</label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-car icone"></i>
+                        <div class="content">
+                            2. IDENTIFICAÇÃO DO VEÍCULO
+                        </div>
+                    </h3>
+                </div>
+                <div class="ui secondary segment">
+                    <div class="ui divided list">
+                            <div class="item">
+                                <label class="header label"> <b>PLACA: </b>{% if vei.placa %}{{vei.placa}} {% elif infracao.veiculo.placa %} {{infracao.veiculo.placa}} {% else %} Não informado {% endif %} </label>
+                            </div>
+                        <div class="item">
+                            <label class="header label"> <b>CHASSI: </b>{% if vei.chassi %} {{ vei.chassi }} {% else %} {% if infracao.veiculo.chassi %} {{infracao.veiculo.chassi}}{% else %} Não informado {% endif %} {% endif %}  </label>
+
+                        </div>
+                        <div class="item">
+                            <label class="header label">MARCA/MODELO: {% if vei.modelo %} {{ vei.modelo }} {% else %} {% if infracao.veiculo.modelo.descricao%} {{infracao.veiculo.modelo.descricao}} {% else %} Não informado {% endif %} {% endif %} </label>
+                            
+                        </div>
+
+                        <div class="item">
+                            <label class="header label">ESPÉCIE: {% if vei.especie %} {{ vei.especie }} {% else %} {% if infracao.veiculo.especie.descricao %} {{infracao.veiculo.especie.descricao}} {% else %} Não informado {% endif %} {% endif %} </label>
+                    
+                        </div>
+
+                        <div class="item">
+                            <label class="header label"> TIPO:{% if vei.tipo_veiculo %} {{ vei.tipo_veiculo }} {% else %} {% if infracao.veiculo.tipo_veiculo.descricao %} {{infracao.veiculo.tipo_veiculo.descricao}} {% else %} Não informado {% endif %}  {% endif %}</label>
+                            
+                        </div>
+
+                         <div class="item">
+                            <label class="header label"> CATEGORIA: {% if vei.categoria %} {{ vei.categoria }} {% else %} {% if infracao.veiculo.categoria.descricao %} {{infracao.veiculo.categoria.descricao}} {% else %} Não informado {% endif %} {% endif %}</label>
+                            
+                        </div>
+                        {% if infracao.is_estrangeiro %}
+                        {% else %}
+                        <div class="item">
+                            <label class="header label">CIDADE:{% if vei.cidade %} {{vei.cidade}}{% elif infracao.veiculo.cidade.nome %} {{infracao.veiculo.cidade.nome}} {% else %} Não informado {% endif %} </label>
+                        </div>
+                        {% endif %}
+
+                        {% if infracao.is_estrangeiro %}
+                        {% else %}
+                        <div class="item">
+                            <label class="header label">UF:{% if vei.uf %} {{vei.uf}} {% elif infracao.veiculo.cidade.uf.sigla %} {{infracao.veiculo.cidade.uf.sigla}} {% else %} Não informado {% endif %} </label>
+                        </div>
+                        {% endif %}
+
+                        <div class="item">
+
+                            <label class="header label"> <b>PAÍS: </b>{% if infracao.is_estrangeiro %} {% if vei.pais %} {{ vei.pais }} {% else %} Não informado {% endif %}{% else %}  BRASIL {% endif %}</label>
+
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-file-text icone"></i>
+                        <div class="content">
+                            3. IDENTIFICAÇÃO DO LOCAL DA INFRAÇÃO
+                        </div>
+                    </h3>
+                </div>
+                <div class="ui secondary segment">
+                    <div class="ui divided list">
+                        <div class="item">
+                            <label class="header label">LOCAL DA INFRAÇÃO: {% if infracao.local %}{{infracao.local}} {{infracao.local_numero}}{% else %} Não informado {% endif %} </label>
+                        </div>
+                         <div class="item">
+                            <label class="header label">DATA/HORA: {{infracao.data_infracao}}</label>
+                        </div>
+                        <div class="item">
+                            <label class="header label">CÓDIGO DO MUNÍCIPIO: {{det.cod_municipio}}</label>
+                        </div>
+                       
+                        <div class="item">
+                            <label class="header label"> MUNÍCIPIO: JOINVILLE UF: SC </label> 
+                        </div>
+                    </div>
+                </div>
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-user icone"></i>
+                        <div class="content">
+                            4. TIPIFICAÇÃO DA INFRAÇÃO
+                        </div>
+                    </h3>
+                </div>
+                <div class="ui secondary segment">
+                    <div class="ui divided list">
+
+                        <div class="item">
+                            <label class="header label">CÓDIGO / DESCRIÇÃO DA INFRAÇÃO: {%if infracao.tipo_infracao_id %}{{infracao.tipo_infracao_id}}{% else %} Não informado {% endif %} </label>
+                            {{infracao.tipo_infracao.descricao}}
+                            
+                        </div>
+
+                    </div>
+                </div>
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-eye icone"></i>
+                        <div class="content">
+                            5. IDENTIFICAÇÃO DO AGENTE AUTUADOR
+                        </div>
+                    </h3>
+                </div>
+                <div class="ui secondary segment">
+                    <div class="ui divided list">
+                        <div class="item">
+                            <label class="header label">MATRÍCULA: {{infracao.agente.identificacao}}</label>   
+                        </div>
+                         <div class="item">
+                            <label class="header label">ASSINATURA:</label>   
+                        </div>
+                    </div>
+                </div>
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-user-secret icone"></i>
+                        <div class="content">
+                            6. IDENTIFICAÇÃO DO CONDUTOR
+                        </div>
+                    </h3>
+                </div>
+                <div class="ui secondary segment">
+                    <div class="ui divided list">
+                        <div class="item">
+                            <label class="header label">NOME: {% if infracao.infrator.nome %} {{infracao.infrator.nome}}{% else %} Não informado {% endif %}</label>
+                        </div>
+                        <div class="item">
+                            <label class="header label">CNH/PPD: {% if infracao.infrator.nome %} {{infracao.infrator.cnh}} {% else %} Não informado {% endif %}</label>
+                        </div>
+
+                        <div class="item">
+                            <label class="header label">CPF:{% if infracao.infrator.documento %} {{infracao.infrator.documento}} {% else %} Não informado {% endif %}</label>
+                        </div>
+                        <div class="item">
+                            <label class="header label">ASSINATURA:</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-user-secret icone"></i>
+                        <div class="content">
+                            7. IDENTIFICAÇÃO DO INFRATOR
+                        </div>
+                    </h3>
+                </div>
+                <div class ="ui secondary segment">
+                    <div class="ui divided list">
+                            <div class="item">
+                                <label class="header label">NOME:{% if infracao.infrator.nome %} {{infracao.infrator.nome}} {% else %} Não informado {% endif %}</label>
+                            </div>
+                           
+                            <div class="item">
+                                <label class="header label">CPF / CNPJ: {% if infracao.infrator.documento %}{{infracao.infrator.documento}} {% else %} Não informado {% endif %}</label>
+                            </div>
+                          
+                        </div>
+                </div>
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-user-secret icone"></i>
+                        <div class="content">
+                            8. OBSERVAÇÃO
+                        </div>
+                    </h3>
+                </div>
+                <div class ="ui secondary segment">
+                    <div class="ui divided list">
+                            <div class="item">
+                                {% if infracao.motivo_cancelamento != None %}Cancelado por: {{ infracao.motivo_cancelamento }}
+                                {% elif infracao.obs %}{{infracao.obs}}{% else %} Não informado {% endif %}
+                            </div>
+                                                    
+                    </div>
+                </div>
+                <div class="ui tertiary segment">
+                    <h3 class="ui header">
+                        <i class="fa fa-picture-o icone"></i>
+                        <div class="content">
+                            Anexo
+                        </div>
+                    </h3>
+                </div>
+                <div class="ui secondary segment">
+                    <div class="ui medium images anexo">
+                        {% for img in imagens %}
+                        <img src="/{{img.photo}}">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <a href='..'>
+                <button type="button" class="ui cancel red button">Cancelar</button>
+            </a>
+            <a href='javascript:window.print()' rel="nofollow"
+               target="_blank">
+                <button type="button" class="ui verde button">Imprimir</button>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

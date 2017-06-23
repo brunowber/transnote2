@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %} Status {% endblock %}
+
+{% block refresh %}
+
+{% endblock %}
+
+{% block semantic_2.1 %}
+<link rel="stylesheet" href="{{ STATIC_URL }}semantic-2.1/semantic.min.css"/>
+<script src="{{ STATIC_URL }}semantic-2.1/semantic.min.js"></script>
+{% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block sobre %}item oculta{% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class="ui grid">
+    <div class="centered row">
+        <div class="seven wide column">
+            <h2 class="ui header">
+                <i class="settings icon"></i>
+                <div class="content">
+                    Gerar Banco Móvel
+                    <div class="sub header">Cria a Carga Inicial e Atualização para os Dispositivos Móveis.</div>
+                </div>
+            </h2>
+        </div>
+    </div>
+    <div class="centered row">
+        <div class="seven wide column">
+            {% if erro and status != 'Concluido' %}
+            <aside class="ui error message">
+                <h3 class="header">
+                    Banco Móvel foi cancelado, pois ocorreu um erro!
+                </h3>
+            </aside>
+            <div class="ui progress error" data-percent="{{ status_mensagem }}">
+                <div class="bar">
+                    <div class="progress"></div>
+                </div>
+                <div class="label">ERRO! {{ status_mensagem }}% Gerado do Banco Móvel</div>
+            </div>
+            {% else %}
+            {% if status == 'Concluido' and status_mensagem == 100 %}
+            <aside class="ui positive message">
+                <h3 class="header">
+                    Banco Móvel foi gerado com Sucesso!
+                </h3>
+            </aside>
+            {% endif %}
+
+            <div class="ui active progress" data-percent="{{status_mensagem}}" id="barra" onload="interval">
+                <div class="bar">
+                    <div class="progress" id="progresso"></div>
+                </div>
+                <div class="label" id="status_mensagem">{{ status_mensagem }}% Gerado do Banco Móvel</div>
+            </div>
+            {% endif %}
+
+            {% if status == 'Concluido' and status_mensagem == 100 %}
+            <a href="/">
+                <div class="ui confirm green button right floated">Continuar</div>
+            </a>
+            {% else%}
+            <div class="ui cancel red button right floated" id="cancelar_carga">Cancelar</div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="centered row">
+        <div class="seven wide column">
+            <form method="POST" action="{% url 'status-sqlite' %}" class='ui form modal'>
+                {% csrf_token %}
+                <i class="close icon"></i>
+                <h3 class="ui header" id="cancelar">
+                    Deseja cancelar o progresso?
+                </h3>
+                <div class="ui relaxed list">
+                    <div class="item">
+                        <p class="header">As alterações feitas até o momento serão perdidas, e não afetarão Carga
+                            Inicial e Atualização nos dispositivos móveis!</p>
+                    </div>
+                </div>
+                <div class="actions">
+                    <input type="submit" class="ui verde button" value="Sim"/>
+                    <button type="button" class="ui cancel red button">Não</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('.ui.progress').progress();
+    $('.ui.modal')
+            .modal('setting', 'closable', false)
+            .modal('attach events', '#cancelar_carga', 'show');
+
+    function interval(){
+    $.ajax({
+        type: 'GET',
+        url: '/status-sqlite/',
+        data: {
+            refresh:''
+        },
+        dataType: 'json',
+        success: function (data) {
+            $('#barra').progress({
+                    percent: data[2]
+                });
+            $("#status_mensagem").html(data[2]+'% Gerado do Banco Móvel');
+        concluido = data[0];
+            if(data[0]=="Cancelado"){
+                location.reload(true);
+            }
+            if(data[0]== "Concluido" ){
+                count = 1;
+                location.reload(true);
+
+            }
+             console.log(data);
+
+        },
+        error: function (xhr, errmsg) {
+            console.log(xhr.status + ": " + xhr.responseText + "Error: " + errmsg);
+        }
+    });
+}
+if (performance.navigation.type != 1) {
+    setInterval(interval, 1000);
+  }
+
+//Se o usuário der refresh para de atualizar o progresso.
+
+
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block title %} Cadastro para o DET007 {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item active{% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid'>
+    <div class='row'>
+        <div class='three wide column'></div>
+        <div class='ten wide column'>
+            
+            <form method="POST" action="{% url 'cadastra-det' %}" class='ui form'>
+               
+                {% csrf_token %}
+                <h2 class='ui header'>
+                    <i class="icon list layout icone"></i>Cadastro de Informações para o DET007
+                    <div class='sub header'>Prencha os campos abaixo.</div>
+                </h2>
+                
+                <div class="two fields">
+                    <div class="field">
+                        <label>Tipo de Registro</label>
+                        {{ form.tipo_registro }}
+                        <div class="ui verde pointing label hidden id_tipo_registro">
+                           Números. Valor padrão 0.
+                        </div>
+                        {% if form.tipo_registro.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.tipo_registro.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="field">
+                        <label>Formato</label>
+                        {{ form.formato }}
+                         <div class="ui verde pointing label large hidden id_formato">
+                           Letras e números. Até 6 caracteres. Valor padrão DET007.
+                        </div>
+                        {% if form.formato.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.formato.errors }}
+
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="three wide field">
+                        <label>Código da Entidade </label>
+                            {{ form.cod_entidade }}
+                        <div class="ui verde pointing label hidden id_cod_entidade">
+                           3 Números. Valor padrão 789.
+                        </div>
+                        {% if form.cod_entidade.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.cod_entidade.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="thirteen wide field">
+                        <label>Entidade</label>
+                            {{ form.entidade }}
+                        <div class="ui verde pointing label large hidden id_entidade">
+                           Letras e números. Até 40 caracteres. Valor padrão Detrans.
+                        </div>
+                        {% if form.entidade.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.entidade.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="three fields">
+                    <div class="field">
+                        <label>Código do Órgão Autuador  </label>
+                        {{ form.autuador }}
+                        <div class="ui verde pointing label hidden id_autuador">
+                           6 Números. Valor padrão 008088.
+                        </div>
+                        {% if form.autuador.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.autuador.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="field">
+                        <label>Tipo de Arquivo</label>
+                            {{ form.tipo_arquivo }}
+                        <div class="ui verde pointing label large hidden id_tipo_arquivo">
+                           1 Letra. Valor padrão P.
+                        </div>
+                        {% if form.tipo_arquivo.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.tipo_arquivo.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="field">
+                        <label>Filler</label>
+                        {{ form.filler }}
+                        <div class="ui verde pointing label large hidden id_filler">
+                           Espaço em branco no fim do arquivo. Números. Valor padrão 182.
+                        </div>
+                        {% if form.filler.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.filler.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="field">
+                        <label>Código de Município</label>
+                        {{ form.cod_municipio }}
+                        <div class="ui verde pointing label large hidden id_filler">
+                           Espaço em branco no fim do arquivo. Números. Valor padrão 182.
+                        </div>
+                        {% if form.cod_municipio.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.cod_municipio.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+                <a href='/cadastros'>
+                    <button type="button" class="ui cancel red button">Cancelar</button>
+                </a>
+                <button type="submit" class="ui verde button">Salvar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

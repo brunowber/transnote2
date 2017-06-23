@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %} Upload Logo {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item active{% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+    <div class='ui grid'>
+        <div class='row'>
+            <div class='three wide column'></div>
+            <div class='ten wide column'>
+
+                <form method="post" action="" class='ui form' enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <h2 class='ui header'>
+                        <i class="fa fa-motorcycle icone"></i> Informe a Logo para ser guardada
+                    </h2>
+                    {% if erro %}
+                        <div class="eight wide column ui negative message">
+                            <div class="header">
+                                Arquivo inválido
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class='three fields'>
+
+                        <div class='field'>
+                            <label>Sigla</label>
+
+                            <div>
+                                {{ form.sigla }}
+                                {% if form.sigla.errors %}
+                                    <div class="ui red pointing label">
+                                        {{ form.sigla.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Nome Completo</label>
+
+                            <div>
+                                {{ form.nome_completo }}
+                                {% if form.nome_completo.errors %}
+                                    <div class="ui red pointing label">
+                                        {{ form.nome_completo.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='image field'>
+                            <label>Logo</label>
+
+                            <div>
+                                {{ form.logo }}
+                                {% if form.logo.errors %}
+                                    <div class="ui red pointing label">
+                                        {{ form.logo.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="ui cancel red button">Cancelar</button>
+                    <button type="submit" class="ui verde button">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

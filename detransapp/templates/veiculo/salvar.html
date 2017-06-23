@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+{% block title %} Cadastro de Ve&iacute;culo {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item active{% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid'>
+    <div class='row'>
+        <div class='three wide column'></div>
+        <div class='ten wide column'>
+            {% if form.instance.renavam %}
+          
+            <form method="POST" action="{% url 'cad-veiculo' form.instance.renavam %}" class='ui form'>
+                {% else %}
+                <form method="POST" action="{% url 'cad-veiculo' %}" class='ui form'>
+                    
+                    {% endif %}
+                    {% csrf_token %}
+                    <h2 class='ui header'>
+
+                        <i class="fa fa-car icone"></i> Cadastro de Ve&iacute;culo
+                        <div class='sub header'>Prencha os campos abaixo.</div>
+
+                    </h2>
+                    <div class='three fields'>
+                         <div class='field'>
+                            <label>Chassi</label>
+
+                            <div>
+                            {% if form.instance.renavam %}
+                                <input type="text" value="{{ form.instance.chassi }}" disabled/>
+                            {% else %}
+                                {{ form.chassi }}
+                                {% if form.chassi.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.chassi.errors }}
+                                </div>
+                                {% endif %}
+                            {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Placa</label>
+
+                            <div>
+                                {{ form.placa }}
+                                {% if form.placa.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.placa.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Modelo</label>
+
+                            <div>
+                                {{ form.modelo }}
+                                {% if form.modelo.errors%}
+                                <div class="ui red pointing label">
+                                    {{ form.modelo.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='three fields'>
+                        <div class='field'>
+                            <label>Tipo</label>
+
+                            <div>
+                                {{ form.tipo_veiculo }}
+                                {% if form.tipo_veiculo.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.tipo_veiculo.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Número do Motor</label>
+
+                            <div>
+                                {{ form.nr_motor }}
+                                {% if form.nr_motor.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.nr_motor.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Especie</label>
+
+                            <div>
+                                {{ form.especie }}
+
+                                {% if form.especie.errors%}
+                                <div class="ui red pointing label">
+                                    {{ form.especie.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='two fields'>
+                        <div class='field'>
+                            <label>Cor</label>
+
+                            <div>
+                                {{ form.cor}}
+                                {% if form.cor.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.cor.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Categoria</label>
+
+                            <div>
+                                {{ form.categoria }}
+
+                                {% if form.categoria.errors%}
+                                <div class="ui red pointing label">
+                                    {{ form.categoria.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='two fields'>
+                        <div class='field'>
+                            <label>Renavam</label>
+
+                            <div>
+                                {{ form.renavam }}
+                                {% if form.renavam.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.renavam.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Numero de passageiro</label>
+
+                            <div>
+                                {{ form.num_passageiro }}
+
+                                {% if form.num_passageiro.errors%}
+                                <div class="ui red pointing label">
+                                    {{ form.num_passageiro.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='two fields'>
+                        <div class='field'>
+                            <label>Ano Fabricacao</label>
+
+                            <div>
+                                {{ form.ano_fabricacao }}
+                                {% if form.ano_fabricacao.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.ano_fabricacao.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Ano Modelo</label>
+
+                            <div>
+                                {{ form.ano_modelo }}
+
+                                {% if form.ano_modelo.errors%}
+                                <div class="ui red pointing label">
+                                    {{ form.ano_modelo.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='fields'>
+                        <div class='four wide field'>
+                            <label>UF</label>
+
+                            <div>
+                                {{ form.uf }}
+                                {% if form.uf.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.uf.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='twelve wide field'>
+                            <label>Cidade</label>
+
+                            <div>
+                                {{ form.cidade }}
+                                {% if form.cidade.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.cidade.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                    </div>
+                    <a href='/relatorios/'>
+                        <button type="button" class="ui cancel red button">Cancelar</button>
+                    </a>
+                    <button type="submit" class="ui verde button">Salvar</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

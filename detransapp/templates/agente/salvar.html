@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block title %} Cadastro de agente {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item active{% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid'>
+    <div class='row'>
+        <div class='three wide column'></div>
+        <div class='ten wide column'>
+            {% if form.instance.id %}
+            <form method="POST" action="{% url 'cad-agente' form.instance.id %}" class='ui form'>
+                {% else %}
+                <form method="POST" action="{% url 'cad-agente' %}" class='ui form'>
+                    {% endif %}
+                    {% csrf_token %}
+                    <h2 class='ui header'>
+                        <i class="fa fa-user-secret icone"></i>Cadastro de Agente
+                        <div class='sub header'>Prencha os campos abaixo.</div>
+
+                    </h2>
+
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Nome</label>
+
+                            {{ form.first_name}}
+                            {% if form.first_name.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.first_name.errors }}
+                            </div>
+                            {% endif %}
+
+                        </div>
+                        <div class='field'>
+                             <label>Identificação</label>
+                            {% if not form.instance.id %}
+                                {{ form.identificacao }}
+                            {% if form.identificacao.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.identificacao.errors }}
+                                 </div>
+                            {%  endif %}
+                            {% else %}
+                                <!--<input type="text" value="{{ form.instance.id }}" disabled/>-->
+                                <input id="identificacao" maxlength="6" name="identificacao" type="text" value="{{ form.instance}}" readonly="readonly" />
+
+                            {% endif %}
+                            {% if form.identificacao.errors %}
+
+                            {% endif %}
+
+
+                        </div>
+                    </div>
+                    <div class='two fields'>
+                        <div class="field">
+                            <label>Usu&aacute;rio</label>
+
+                            {{ form.username}}
+                            {% if form.username.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.username.errors }}
+                            </div>
+                            {% endif %}
+
+                        </div>
+                        <div class="field">
+                            <label>Senha</label>
+
+                            {{ form.password}}
+                            {% if form.password.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.password.errors }}
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>CPF</label>
+
+                        {{ form.cpf }}
+                        {% if form.cpf.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.cpf.errors }}
+                        </div>
+                        {% endif %}
+
+                    </div>
+                    
+                    <div class="field">
+                        <label>Ativo</label>
+
+                        {{ form.is_active }}
+                        {% if form.is_active.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.is_active.errors }}
+                        </div>
+                        {% endif %}
+
+                    </div>
+
+                    <div class="field">
+                        <label>Conceder permissão geral para Criação, Edição e Remoção</label>
+
+                        {{ form.permissao_geral }}
+                        {% if form.permissao_geral.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.permissao_geral.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+
+                    
+                    <a href='/relatorios/'>
+                        <button type="button" class="ui cancel red button">Cancelar</button>
+                    </a>
+                    <button type="submit" class="ui verde button">Salvar</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

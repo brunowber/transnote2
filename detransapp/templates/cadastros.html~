@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block result %}
+	{% if resultados %}
+		<table>
+			<tr>
+				<td>Placa </td>
+				<td>Modelo </td>
+				<td>Marca </td>
+				<td>Condutor </td>
+				<td>Data </td>
+				<td>Agente </td>
+			</tr>
+			{% for resultado in resultados %}
+			<tr>	
+				<td>{{ resultado.veiculo.placa }}</td>
+				<td>{{ resultado.veiculo.modelo }}</td>
+				<td>{{ resultado.veiculo.marca }}</td>
+				<td>{{ resultado.condutor.nome }}</td>
+				<td>{{ resultado.data }}</td>
+				<td>{{ resultado.agente.nome }}</td>
+
+			</tr>
+			{% endfor %}
+		</table>
+	{% else %}
+		<p>N%atilde;o foram encontrados resultados para a busca</p>
+	{% endif %}
+{% endblock %}	
+	

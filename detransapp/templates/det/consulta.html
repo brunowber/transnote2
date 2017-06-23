@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %} Consulta de DET007 {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+
+<div class='ui grid relatorio'>
+    <div class='row'>
+        <div class='three wide column'></div>
+        <div class='ten wide column'>
+            <h2 class='ui header'>
+                <i class="book icon icone"></i>Consulta DET007
+                <div class='sub header'>Faça o download do código abaixo.</div>
+            </h2>
+            <div class="ui fluid form">
+                <form method="POST" action="{% url 'consulta-det' %}">
+                    {% csrf_token %}
+                    <div class='field'>
+                        <label>Busca</label>
+                        <input type="text" name="procurar"/>
+                    </div>
+                    <button type="submit" class="ui verde button">Consultar</button>
+                    <br> <br>
+                </form>
+            <table  class="ui table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Baixar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for det in dets %}
+                    <tr>
+                        <td>
+                            {{det.codigo}}
+                        </td>
+                        <td>
+                            <button type = "button" name = "Download" class="ui esquerda verde button " onClick = window.open("/config/geradet/{{det.codigo}}/{{formato}}/")><i class="download icon"></i>Baixar.det</button>
+                            <button type = "button" name = "Download" class="ui esquerda verde button " onClick = window.open("/config/geradet/{{det.codigo}}/{{formato1}}/")><i class="download icon"></i>Baixar.zip</button>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    
+                    <button type = "button" name = "Gera DET" class="ui direita verde button " onClick = window.open("/config/geradet/format/{{formato}}/")><i class="download icon"></i>Gera DET </button>
+                   
+                     <button type = "button" name = "Gera DET" class="ui direita verde button " onClick = window.open("/config/geradet/format/{{formato1}}/")><i class="download icon"></i>Gera DET.zip </button>
+                   
+              </tbody>
+            </table>
+            {% include "partials/paginacao.html" with lista=dets procurar=procurar %}
+         </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

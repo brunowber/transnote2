@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %} Relat&oacute;rio de Tipo de Infra&ccedil;&atilde;o {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+
+{% block result %}
+<div class='ui grid relatorio'>
+    <div class='row'>
+        <div class='three wide column'>
+        </div>
+        <div class='ten wide column'>
+
+            <h2 class='ui header'>
+
+                <i class="archive icon"></i>
+
+                <div class='content'>
+                    Relat&oacute;rio de Tipo de Infra&ccedil;&atilde;o
+                    <div class='sub header'>Prencha os campos abaixo para refinar a busca.</div>
+                </div>
+
+            </h2>
+            <div class="ui fluid form">
+                <form method="POST" action="{% url 'tipo-infracao-consulta' %}">
+                    {% csrf_token %}
+                    <div class='field'>
+                        <label>Busca</label>
+                        <input type="text" name="procurar"/>
+                    </div>
+
+                    <button type="submit" class="ui verde button">Consultar</button>
+                </form>
+                {% if tipos %}
+                <table class="ui table">
+                    <thead>
+                    <tr>
+                        <th>C&oacute;digo</th>
+                        <th>Descrição</th>
+                        <th>Legislação</th>
+                        <th>Ativo</th>
+                        <th>Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for tipo in tipos %}
+                    <tr>
+                        <td>{{ tipo.codigo }}</td>
+                        <td>{{ tipo.descricao }}</td>
+                        <td>{{ tipo.lei }}</td>
+                        <td>
+                            {% if tipo.ativo %}
+                            <i class="icon green big check"></i>
+                            {% else %}
+                            <i class="icon red big remove"></i>
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url 'cad-tipo-infracao' tipo.codigo %}"><i class='icon configure'></i>Editar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="ui center aligned inverted red segment">
+                    <h3 class='ui header'>
+
+                        <i class="icon warning sign"></i>
+
+                        <div class='content'>
+                            Nenhum resultado para sua busca!
+                        </div>
+
+                    </h3>
+                </div>
+                {% endif%}
+                {% include "partials/paginacao.html" with lista=tipos procurar=procurar %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
