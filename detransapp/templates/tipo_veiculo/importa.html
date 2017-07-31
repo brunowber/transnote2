@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %} Importaç&atilde;o de Tipo de Ve&iacute;culo {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+    <div class='ui grid relatorio'>
+        <div class='row'>
+            <div class='three wide column'>
+            </div>
+            <div class='ten wide column'>
+                <h2 class='ui header'>
+                    <i class="fa fa-motorcycle icone"></i>Importaç&atilde;o de Tipo de Ve&iacute;culo
+                </h2>
+                {% if erro %}
+                    <div class="eight wide column ui negative message">
+                        <div class="header">
+                            Arquivo inválido
+                        </div>
+                    </div>
+                {% endif %}
+                {% if not envio %}
+                    <form method="POST" enctype="multipart/form-data" class='ui form'>
+                        {% csrf_token %}
+                        <div class='field'>
+                            <label>Arquivo</label>
+                            <div>
+                                {{ form.arquivo }}
+                                {% if form.arquivo.errors %}
+                                    <div class="ui red pointing label">
+                                        {{ form.arquivo.errors }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <input type='submit' value='Enviar' class='ui verde button'>
+                    </form>
+                {% else %}
+                    Foram importados {{ qtd }} tipos de ve&iacute;culo.
+                {% endif %}
+                <div class='sub header'><i class="info circle large icon icone"></i>Apenas arquivos do tipo texto.</div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

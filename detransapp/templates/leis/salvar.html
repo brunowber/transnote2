@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %} Cadastro de legisla&ccedil;&atilde;o {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item active{% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid'>
+    <div class='row'>
+        <div class='three wide column'></div>
+        <div class='ten wide column'>
+            {% if form.instance.id %}
+                <form method="POST" action="{% url 'cad-legislacao' form.instance.id %}" class='ui form'>
+            {% else %}
+                <form method="POST" action="{% url 'cad-legislacao' %}" class='ui form'>
+            {% endif %}
+                {% csrf_token %}
+                <h2 class='ui header'>
+                    <i class="legal icon"></i>
+
+                    <div class="content">
+                        Cadastro de Legisla&ccedil;&atilde;o
+                        <div class='sub header'>Prencha os campos abaixo.</div>
+                    </div>
+                </h2>
+                <div class='field'>
+                    <label>Lei</label>
+
+                    <div>
+                        {{ form.lei }}
+                        {% if form.lei.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.lei.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <a href='/relatorios/'>
+                    <button type="button" class="ui cancel red button">Cancelar</button>
+                </a>
+                <button type="submit" class="ui verde button">Salvar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

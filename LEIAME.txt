@@ -1,0 +1,25 @@
+Esse manual foi escrito para o Linux.
+
+Para o funcionamento dessa aplicação, é necessária a instalação de:
+
+	Django 1.8
+	pip
+	djangorestframework (instalado via pip)
+	(opcional) PostGres
+
+
+Para rodar a aplicação:
+
+	Em um terminal, navegar até a pasta da aplicação.
+
+	Na pasta raiz, que contém o arquivo manage.py, existe também um db.sqlite, que é o banco de dados da aplicação em SqLite. Para utilizar um PostGres, deve-se utilizar o seguinte comando:
+
+	python manage.py syncdb --settings = detrans.settings.vilmar
+
+	Uma vez o banco criado, utiliza-se o comando
+	
+	python manage.py runserver
+
+	A aplicação poderá ser visualizada e utilizada no navegador, através do acesso de:
+
+	localhost:8000

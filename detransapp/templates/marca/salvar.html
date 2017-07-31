@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %} Cadastro de marca {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item active{% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid'>
+    <div class='row'>
+        <div class='three wide column'></div>
+        <div class='ten wide column'>
+            {% if form.instance.id %}
+            <form method="POST" action="{% url 'cad-marca' form.instance.id %}" class='ui form'>
+                {% else %}
+                <form method="POST" action="{% url 'cad-marca' %}" class='ui form'>
+                    {% endif %}
+                    {% csrf_token %}
+                    <h2 class='ui header'>
+                        <i class="asterisk icon"></i>
+                        <div class="content">
+                            Cadastro de Marca
+                            <div class='sub header'>Prencha os campos abaixo.</div>
+                        </div>
+                    </h2>
+                    <div class="two fields">
+                        <div class='field'>
+                            <label>Sigla</label>
+                            <div>
+                                {{ form.sigla }}
+                                {% if form.sigla.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.sigla.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='field'>
+                            <label>Nome</label>
+                            <div>
+                                {{ form.nome }}
+                                {% if form.nome.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.nome.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <a href='/cadastros'>
+                        <button type="button" class="ui cancel red button">Cancelar</button>
+                    </a>
+                    <button type="submit" class="ui verde button">Salvar</button>
+                </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

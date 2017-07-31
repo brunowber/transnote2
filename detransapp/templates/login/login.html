@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Gestao de multas{% endblock %}
+
+
+{% block result %}
+
+    {% if user.is_authenticated %}
+        <div class="ui grid">
+            <div class="four wide column"></div>
+            <div class="eight wide column ui negative message">
+                <i class="close icon"></i>
+                <div class="header">
+                    Você já está logado
+                </div>
+            </div>
+            <div class="four wide column"></div>
+        </div>
+        <meta http-equiv="refresh" content="1; url=/"/>
+    {% else %}
+
+        <div class='ui centered grid'>
+            <div class='three column centered row'>
+                <div class='ui column'>
+                    {% if form.errors %}
+                        <aside class="ui error message">
+                            <h3 class="header">
+                                E-mail ou senha inválidos.
+                            </h3>
+                        </aside>
+                    {% endif %}
+                    <form class='ui segment form' method="POST" action="{% url 'django.contrib.auth.views.login' %}">
+                        {% csrf_token %}
+                        <div class="field">
+                            <label>Usu&aacute;rio</label>
+                            {{ form.username }}
+                        </div>
+                        <div class="field">
+                            <label>Senha</label>
+                            {{ form.password }}
+                        </div>
+                        <input type="hidden" name="next" value="/"/>
+                        <input type='submit' class="ui submit button verde" value='Enviar'>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    {% endif %}
+
+
+
+
+{% endblock %}

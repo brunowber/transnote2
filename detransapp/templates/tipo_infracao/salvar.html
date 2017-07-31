@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block title %} Cadastro de tipo de infraç&atilde; {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item active{% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid'>
+    <div class='row'>
+        <div class='three wide column'></div>
+        <div class='ten wide column'>
+            {% if form.instance.codigo %}
+            <form method="POST" action="{% url 'cad-tipo-infracao' form.instance.codigo %}" class='ui form'>
+                {% else %}
+                <form method="POST" action="{% url 'cad-tipo-infracao' %}" class='ui form'>
+                    {% endif %}
+                    {% csrf_token %}
+                    <h2 class='ui header'>
+                        <i class="archive icon"></i>
+                        <div class='content'>
+                            Cadastro de Tipo de Infra&ccedil;&atilde;o
+                            <div class='sub header'>Prencha os campos abaixo.</div>
+                        </div>
+                    </h2>
+                    <div class='fields'>
+                        <div class='two wide field'>
+                            <label>Código</label>
+                            {% if not form.instance.codigo %}
+                            <div>
+                                {{ form.codigo }}
+                                {% if form.codigo.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.codigo.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            {% else %}
+                            <input type="text" id="codigo" name="codigo" value="{{form.instance.codigo}}"
+                                   readonly="readonly"/>
+                            {% endif %}
+                        </div>
+                        <div class='seven wide field'>
+                            <label>Descrição</label>
+
+                            <div>
+                                {{ form.descricao }}
+                                {% if form.descricao.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.descricao.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class='seven wide field'>
+                            <label>Legislação</label>
+
+                            <div>
+                                {{ form.lei }}
+                                {% if form.lei.errors %}
+                                <div class="ui red pointing label">
+                                    {{ form.lei.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Ativo</label>
+
+                        <div>
+                            {{ form.ativo }}
+                            {% if form.ativo.errors %}
+                            <div class="ui red pointing label">
+                                {{ form.ativo.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <a href='/relatorios/'>
+                        <button type="button" class="ui cancel red button">Cancelar</button>
+                    </a>
+                    <button type="submit" class="ui verde button">Salvar</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

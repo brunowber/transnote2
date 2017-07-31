@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %} Gerar Banco Móvel {% endblock %}
+
+{% block semantic_2.1 %}
+<link rel="stylesheet" href="{{ STATIC_URL }}semantic-2.1/semantic.min.css"/>
+<script src="{{ STATIC_URL }}semantic-2.1/semantic.min.js"></script>
+{% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid'>
+    <div class='centered aligned row'>
+        <div class='seven wide column'>
+            <h2 class="ui header">
+                <i class="settings icon"></i>
+                <div class="content">
+                    Gerar Banco Móvel
+                    <div class="sub header">Cria a Carga Inicial e Atualização para os Dispositivos Móveis.</div>
+                </div>
+            </h2>
+            <aside class="ui error message">
+                <h3 class="header">
+                    Banco Móvel foi cancelado com Sucesso!
+                </h3>
+            </aside>
+            <div class="ui verde button" id="confirmar_inicio">Iniciar</div>
+            <form method="POST" action="{% url 'cria-sqlite'%}" class='ui form modal'>
+                {% csrf_token %}
+                <i class="close icon"></i>
+                <h3 class="ui header">
+                    Deseja iniciar o processo?
+                </h3>
+                <div class="ui relaxed list">
+                    <div class="item">
+                        <p class="header">Este processo demora muito tempo até ser concluído!</p>
+                    </div>
+                </div>
+                <div class="actions">
+                    <input type="submit" class="ui verde button" value="Sim"/>
+                    <button type="button" class="ui cancel red button">Não</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script type="text/javascript">
+    $('.ui.modal')
+            .modal('setting', 'closable', false)
+            .modal('attach events', '#confirmar_inicio', 'show');
+</script>
+{% endblock %}

@@ -1,0 +1,27 @@
+<div class="ui pagination menu">
+    {% if lista.has_previous %}
+    {% if procurar %}
+    <a href="?page={{ lista.previous_page_number }}&procurar={{ procurar }}" class="icon item">
+        <i class="left arrow icon"></i>
+    </a>
+    {% else %}
+    <a href="?page={{ lista.previous_page_number }}" class="icon item">
+        <i class="left arrow icon"></i>
+    </a>
+    {% endif %}
+    {% endif %}
+    {% if lista.has_previous or lista.has_next %}
+    <a class="item"> {{ lista.number }} de {{ lista.paginator.num_pages }} </a>
+    {% endif %}
+    {% if lista.has_next %}
+    {% if procurar %}
+    <a href="?page={{ lista.next_page_number }}&procurar={{ procurar }}" class="icon item">
+        <i class="right arrow icon"></i>
+    </a>
+    {% else %}
+    <a href="?page={{ lista.next_page_number }}" class="icon item">
+        <i class="right arrow icon"></i>
+    </a>
+    {% endif %}
+    {% endif %}
+</div>

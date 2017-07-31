@@ -1,0 +1,347 @@
+/*
+    @author: vanessa rolim;
+    css desenvolvido em cima do framework semantic ui
+
+*/
+
+
+/*=============ALTURAS DE POSICIONAMENTO DE RODAPE==============*/
+
+header{
+    min-height:20%;
+    margin-bottom:1%;
+}
+article{
+    min-height:62.5%;
+}
+footer{
+    min-height:12%;
+}
+
+/*===========================GERAL==============================*/
+.logout{
+    color:#005e83 !important;
+}
+.ui.grid{
+
+    margin:0 !important;
+}
+.linklogo{
+
+    margin: 1% !important;
+}
+
+.linklogo:hover{
+
+    color:#005e83 !important;
+}
+button{
+    margin-bottom:1% !important;
+}
+
+.hidden{
+    display: none;
+}
+
+.header{
+    color:#333;
+}
+
+.button{
+    float:right;
+}
+
+i.inverted.circular.icon.verde{
+    background-color: #005E83 !important;
+    color: #fff !important;
+
+}
+.verde{
+    background-color: #799632 !important;
+    color:#fff !important;
+}
+.azul{
+
+    background-color: #005e83 !important;
+}
+
+.fazul{
+    color: #003A51 !important;
+    cursor:pointer;
+}
+
+.bloco, .bloco a{
+    color:#000;
+    font-size: 18px;
+}
+
+.bloco a:hover{
+    color:#005e83;
+    font-size: 18px;
+}
+
+ h2.ui.header.fazul, .h2.ui.header.vermelho,.h2.ui.header.fverde {
+  font-size: 1.5rem !important;
+}
+h2.ui.header.fazul .content,h2.ui.header.vermelho .content,h2.ui.header.fverde .content {
+  font-size: 1.4rem !important;
+}
+
+.ui.header > .icon, .ui.header > .icone{
+    font-size: 1.9rem !important;
+}
+
+.vermelho{color:#6B0000 !important;}
+
+.fverde{color:#037C20 !important;}
+
+label.header.label{
+    font-size: 1rem !important;
+}
+
+.ui.circular.button#print{
+    margin-top: 2rem;
+}
+/*===========================MENU=============================*/
+.direita{
+    float: right;
+}
+.esquerda{
+    float:left!important;
+}
+.usuario{
+    position:absolute !important;
+    right: 0 !important;
+    margin-top: 0% !important;
+    z-index:99 !important;
+}
+
+.ui.header.cazul{
+    cursor:pointer;
+}
+
+.ui.inverted.blue.segment.cazul{
+    background: #005e83 !important;
+}
+a.branco, .branco {
+    color:#fff;
+    font-size: 18px;
+}
+
+a.branco:hover{
+    color:#fff;
+    font-size: 18px;
+    text-decoration: underline;
+}
+
+.ui.inverted.verde.menu{
+    background-color: #4EA741;
+}
+
+.ui.large.menu .item {
+  font-size: 1.3rem !important;
+ }
+
+/*compatibilidade da largura do menu com a versão 2.1 do semantic-ui*/
+.ui.large.menu{
+    width: 100%;
+}
+
+.item.oculta{
+    display: none !important;
+}
+
+
+/*===========================HOME==============================*/
+i.inverted.verde.icon{
+
+    background-color: #4EA741;
+    color: #FFFFFF !important;
+}
+
+
+.ui.segment.dash{
+    min-height: 250px;
+    /*max-height: 250px;*/
+    /*float: left;*/
+    text-align: center;
+}
+
+/*.ui.segment.dash .label{
+    text-align: center;
+    margin-top: 25%;
+}*/
+
+
+.ui.table.tazul thead th {
+  background: #005E83 !important;
+  color:#fff;
+}
+
+.tazul tbody tr:nth-child(2n) {
+  background-color: rgba(98, 154, 177, 1) !important;
+}
+
+/*=====================ICONES DE CADASTRO================= */
+
+.icone{
+    display: block;
+    float: left;
+    margin: 0em 1em 0em 0em;
+    padding: 0.1em 0em 0em 0em;
+}
+.icone + .content{
+height: 31px;
+}
+
+i.icone {
+    display: inline-block;
+    opacity: 0.75;
+    margin: 0em 0.25em 0em 0em;
+    width: 1.23em;
+    height: 1em;
+    font-family: 'Icons';
+    font-style: normal;
+    line-height: 1;
+    font-weight: normal;
+    text-decoration: inherit;
+    text-align: center;
+    speak: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+i.icone {
+    display: inline-block;
+    opacity: 1;
+    margin: 0em 0.25rem 0em 0em;
+    width: 1.23em;
+    height: 0.9em;
+    font-family: 'Icons';
+    font-style: normal;
+    line-height: 1;
+    font-weight: normal;
+    text-decoration: inherit;
+    text-align: center;
+    speak: none;
+    font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+.ui.list > .item > i.icone {
+    display: table-cell;
+    margin: 0em;
+    padding-top: 0.1rem;
+    padding-right: 0.3em;
+    vertical-align: middle;
+    -webkit-transition: color 0.2s ease;
+    transition: color 0.2s ease;
+}
+
+.ui.list > .item > .icone + .content {
+    display: table-cell;
+    padding: 0em 0em 0em 0.5em;
+    vertical-align: middle;
+}
+
+.ui.list {
+    font-size: 1.4em !important;
+}
+
+.ui.list .item a:hover > i {
+    color: #005e83 !important;
+}
+
+.twelve .ui.list .item a:hover {
+    color: #005e83 !important;
+}
+
+.item .icone{
+
+    margin-right: 0.5em;
+}
+
+.errorlist li{
+
+    list-style: none; 
+    -webkit-padding-start: 0px;
+}
+.errorlist{
+-webkit-padding-start: 0px;
+-webkit-margin-before: 0em;
+-webkit-margin-after: 0em;
+
+}
+.cancel{
+    float:left;
+    background-color: #d95c5c !important;
+}
+
+.ui.form .field > label{
+
+    font-size:1.2em !important;
+}
+
+.ui.header > .icone {
+display: table-cell;
+opacity: 1;
+font-size: 1.5em;
+padding-top: 0.165em;
+vertical-align: middle;
+}
+
+.ui.header > .icone + .content {
+padding-left: 0.75rem;
+display: table-cell;
+vertical-align: middle;
+}
+
+.ui.list > .item{
+
+    line-height: 1.5 !important;
+}
+
+
+/*==========================FOOTER===========================*/
+footer{
+    margin:0 !important;
+    padding:0 !important;
+}
+
+footer.ui.stackable.grid{
+
+    background-color: #005e83;
+    text-align: center !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+
+footer figure{
+
+    margin: 0;
+    margin-left: 5em;
+}
+
+figure.fabrica{
+
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.foot{
+    color:#fff !important;
+}
+
+/*======================== MODAL ==============================*/
+
+.ui.form.modal{
+    padding: 15px !important;
+}
+
+.item > p.header{
+    padding: 0 30px 0 30px;
+}

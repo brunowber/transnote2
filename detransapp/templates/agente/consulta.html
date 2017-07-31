@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %} Relat&oacute;rio de Agentes {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+
+{% block result %}
+<div class='ui grid relatorio'>
+    <div class='row'>
+        <div class='three wide column'>
+        </div>
+        <div class='ten wide column'>
+            <h2 class='ui header'>
+                <i class="fa fa-user-secret icone"></i>Relat&oacute;rio de Agentes
+                <div class='sub header'>Prencha o campo abaixo para refinar a busca.</div>
+
+            </h2>
+            <div class="ui fluid form ">
+                <form method="POST" action="{% url 'agente-consulta' %}" class='ui fluid form'>
+                    {% csrf_token %}
+                    <div class="field">
+                        <label>Busca</label>
+                        <input type="text" name="procurar"/>
+                    </div>
+
+                    <button type="submit" class="ui verde button">Consultar</button>
+                </form>
+
+                <table class="ui table">
+                    <thead>
+                    <tr>
+                        <th>Identificação</th>
+                        <th>Nome</th>
+                        <th>Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for agente in agentes %}
+                    <tr>
+
+                        <!-- <input type='text' id='1' {{ busca }}> -->
+                        <td>{{ agente.identificacao }}</td>
+                        <td>{{ agente.first_name }}</td>
+                        <td><a href="{% url 'cad-agente' agente.id %}"><i class='icon configure'></i>Editar</a></td>
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+                {% include "partials/paginacao.html" with lista=agentes procurar=procurar %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

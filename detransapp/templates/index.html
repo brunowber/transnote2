@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %} Gest&atilde;o de multas {% endblock %}
+
+{% block home %}item active{% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item {% endblock %}
+{% block tudo %} item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+
+<div class='ui stackable grid' id='container'>
+    <div class='row'>
+        <div class='three wide column'>
+            <div class='ui secondary vertical menu paineis'>
+                <h4 class='ui header item'> Painéis
+                    <p class='sub header'> Ative os painéis abaixo</p>
+                </h4>
+                <a class='item'>
+                    <i id='ultimaSincronizacoes' class='small link verde inverted circular minus icon'></i>
+                    Últimas Sincronizações
+                </a>
+                <a class='item'>
+                    <i id='agentesNaoSincronizados' class='small link verde inverted circular minus icon'></i>
+                    Agentes não Sincronizados
+                </a>
+                <!-- <a class='item' >
+                    <i id='graficoInfracoes' class='small link verde inverted circular minus icon'></i>
+                    Gráfico de Infrações
+                </a>-->
+                <a class='item'>
+                    <i id='infracoesUltimaHora' class='small link verde inverted circular minus icon'></i>
+                    Infrações na Última hora
+                </a>
+                <a class='item'>
+                    Infrações Di&aacute;rio
+                    <i id='infracoesMensal' class='small link verde inverted circular minus icon'></i>
+                </a>
+                <a class='item' href="{% url 'upload_apk'%}">
+                    Android Detrans
+                </a>
+                <!-- <a class='item' >
+                    Gráfico de horário
+                    <i id='graficoHorario' class='small link verde inverted circular minus icon'></i>
+                </a> -->
+            </div>
+        </div>
+        <div class='twelve wide column'>
+
+            {% if perms.global_permissions.permissao_geral %}
+            <div class="ui success message">
+                <span class="header">Atenção</span>
+                Você pode editar informações no sistema.
+            </div>
+            {% else %}
+            <div class="ui warning message">
+                <span class="header">Atenção</span>
+                Você possuiu autorização para leitura.
+            </div>
+            {% endif %}
+
+            <div class='ui grid stackable relaxed'>
+                <div class='five wide column ultimaSincronizacoes '>
+                    <div class='ui segment dash'>
+                        <div class='ui center aligned header small'> Últimas sincronizações</div>
+                        {% if ultimasSinc %}
+                        <table class='ui small striped table tazul'>
+                            <thead>
+                            <tr>
+                                <th>Cód</th>
+                                <th>Agente</th>
+                                <th>Hora</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for s in ultimasSinc %}
+                            <tr>
+                                <td> {{ s.agente.identificacao }}</td>
+                                <td> {{ s.agente.first_name }}</td>
+                                <td> {{ s.data_infracao|date:"d/M/Y H:i"}}</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <a class="ui red label dash">
+                            Nenhum agente sincronizado
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class='five wide column agentesNaoSincronizados'>
+                    <div class='ui segment dash'>
+                        <div class='ui center aligned small header'> Agentes não Sincronizados</div>
+                        {% if naoSinc %}
+                        <table class='ui small striped table tazul'>
+                            <thead>
+                            <tr>
+                                <th>Cód</th>
+                                <th>Agente</th>
+                                <th>Tempo</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for n in naoSinc %}
+                            <tr>
+                                <td>{{n.agente.id}}</td>
+                                <td>{{n.agente.first_name}}</td>
+                                {% if n.tempo%}
+                                <td>{{n.tempo |date:"d/M/Y H:i"}}</td>
+                                {% else %}
+                                <td> Nunca</td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <a class="ui red label dash">
+                            Nenhum agente sincronizado
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- <div id ='graficoInf' class='five wide column graficoInfracoes'>
+                    <div class='ui segment dash'>
+                        <div class='ui center aligned small header'> Gráfico de infrações</div>
+                        <div id="grafico"></div>
+                      </div>
+                </div> -->
+                <div class='five wide column infracoesUltimaHora'>
+                    <div class='ui segment dash'>
+                        <div class='ui center aligned small header'>Infraç&otilde;es na &Uacute;ltima Hora</div>
+                        {% if ultimaHora %}
+                        <table class='ui small striped table tazul'>
+                            <thead>
+                            <tr>
+                                <th>Agente</th>
+                                <th>Hor&aacute;rio</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for u in ultimaHora %}
+                            <tr>
+                                <td>{{ u.agente }}</td>
+                                <td>{{ u.data_infracao|date:"d/M/Y H:i"}}</td>
+                            </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <a class="ui red label dash">
+                            Nenhuma infraç&atilde;o na &uacute;ltima hora
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class='five wide column infracoesMensal'>
+                    <div class='ui segment dash center aligned'>
+                        <div class='ui center aligned small header'>Infraç&otilde;es Di&aacute;rio</div>
+                        {% if diario %}
+                        <table class='ui small striped table tazul'>
+                            <thead>
+                            <tr>
+                                <th>Data</th>
+                                <th>Quantidade</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for d in diario %}
+                            <tr>
+                                <td>{{d.data}}</td>
+                                <td>{{d.data_infracao__count}}</td>
+                            </tr>
+                            {%endfor%}
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <a class="ui red label dash">
+                            Nenhuma infraç&atilde;o
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <!-- <div class='five wide column graficoHorario'>
+                    <div class='ui segment dash'>
+                        <div class='ui center aligned small header'>Gr&aacute;fico de Hor&aacute;rios</div>
+                            <div id="grafico"></div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

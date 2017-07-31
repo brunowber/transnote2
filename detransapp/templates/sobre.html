@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}Sobre{% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item {% endblock %}
+{% block sobre %}item active{% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+
+{% block result %}
+<div class='ui stackable grid'>
+    <div class='row'>
+        <div class='three wide column'>
+        </div>
+        <div class='ten wide column'>
+            <h2 class='ui header'>
+                Sobre
+            </h2>
+            <div class='ui segment'>
+                <a href='http://fabricadesoftware.ifc.edu.br'><img class="ui small right floated image"
+                                                                            src="{{ MEDIA_URL }}/img/fabrica.png"></a>
+              <p>O sistema de gest&atilde;o de multas foi desenvolvido pela <a
+                        href='http://fabricadesoftware.ifc.edu.br'>F&aacute;brica de Software </a> como um
+                    projeto de extens&atilde;o, com financiamento do CNPQ.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

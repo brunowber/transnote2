@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %} Relat&oacute;rio de Blocos {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid relatorio'>
+    <div class='row'>
+        <div class='three wide column'>
+        </div>
+        <div class='ten wide column'>
+            <h2 class='ui header'>
+                <i class="icon edit"></i>
+                <div class="content">
+                    Relat&oacute;rio de Blocos
+                </div>
+            </h2>
+            <div class="ui fluid form">
+                <form method="POST" action="{% url 'bloco-consulta' %}">
+                    {% csrf_token %}
+                    <div class='field'>
+                        <label>Busca</label>
+                        <input type="text" name="procurar"/>
+                    </div>
+                    <button type="submit" class="ui verde button">Consultar</button>
+                </form>
+                <table class="ui table">
+                    <thead>
+                    <tr>
+                        <th>In&iacute;cio Bloco</th>
+                        <th>Fim Bloco</th>
+                        <th>Autor</th>
+                        <th>Ativo</th>
+                        <th>Editar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for bloco in blocos %}
+                    <tr>
+                        <td> {{ bloco.inicio_intervalo }}</td>
+                        <td> {{ bloco.fim_intervalo }}</td>
+                        <td> {{ bloco.author }}</td>
+                        {% if bloco.ativo %}
+                        <td>
+                            <div class="ui green empty circular label"></div>
+                        </td>
+                        {% else %}
+                        <td>
+                            <div class="ui red empty circular label"></div>
+                        </td>
+                        {% endif %}
+                        <td><a href="{% url 'cad-bloco' bloco.id %}"><i class='icon configure'></i>Editar</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% include "partials/paginacao.html" with lista=especies procurar=procurar %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

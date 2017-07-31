@@ -1,0 +1,15 @@
+db:
+  image: postgres
+nginx:
+  image: nginx
+detrans:
+  build: .
+  command: /usr/local/bin/gunicorn detrans.wsgi:application -w 2 -b :8000:
+    - .:/code
+  ports:
+    - "80:8000"
+  links:
+  - db
+  - nginx
+
+

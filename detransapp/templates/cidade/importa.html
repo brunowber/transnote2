@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %} Relat&oacute;rio de Categoria {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+{% block result %}
+<div class='ui grid relatorio'>
+    <div class='row'>
+        <div class='three wide column'>
+        </div>
+        <div class='ten wide column'>
+            <h2 class='ui header'>
+                <i class="fa fa-truck icone"></i>Importaç&atilde;o de cidade
+            </h2>
+            {% if not envio %}
+            <form method="POST" enctype="multipart/form-data" class='ui form'>
+                {% csrf_token %}
+                <div class='field'>
+                    <label>Arquivo</label>
+                    <div>
+                        {{ form.arquivo }}
+                        {% if form.arquivo.errors %}
+                        <div class="ui red pointing label">
+                            {{ form.arquivo.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <input type='submit' value='Enviar' class='ui button'>
+            </form>
+            {% else %}
+            Foram importadas {{qtd}} cidades.
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
