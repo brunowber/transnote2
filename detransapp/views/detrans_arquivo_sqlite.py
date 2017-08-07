@@ -4,7 +4,7 @@ import threading
 import sqlite3
 from datetime import datetime
 import os
-
+from pysqlcipher import dbapi2 as sqliteCipher
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
@@ -40,9 +40,9 @@ class ThreadDetransSqlite(threading.Thread):
                 os.remove(self.detrans_sqlite_nome_execucao + '.gz')
 
             self.progress = 2
-            conn = sqlite3.connect(self.detrans_sqlite_nome_execucao)
+            conn = sqliteCipher.connect(self.detrans_sqlite_nome_execucao)
             cursor = conn.cursor()
-
+            cursor.execute("PRAGMA key='test'")
             self.progress = 3
             cria_db.criar(conn, cursor)
 
@@ -94,6 +94,15 @@ class ThreadDetransSqlite(threading.Thread):
             if os.path.exists(self.detrans_sqlite_nome_execucao):
                 os.rename(self.detrans_sqlite_nome_execucao,
                           self.detrans_sqlite_nome)
+
+            # conn = sqliteCipher.connect(self.detrans_sqlite_nome)
+            # c = conn.cursor()
+            # c.execute("PRAGMA key='test'")
+            # c.execute("ATTACH DATABASE '"+ self.detrans_sqlite_nome +"' AS encrypted KEY 'test';")
+            # c.execute("SELECT sqlcipher_export('encrypted');")
+            # c.execute("DETACH DATABASE encrypted;")
+            # conn.commit()
+            # c.close()
 
             self.is_finalisado = True
             self.is_erro_processo = False
