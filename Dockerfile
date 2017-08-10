@@ -1,6 +1,5 @@
 FROM django:python2
-ADD . /talionario
-WORKDIR /talionario
+COPY . /
 RUN pip install -r requirements.txt
-RUN ["chmod", "+x", "/talionario/entrypoint.sh"]
-ENTRYPOINT /talionario/entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

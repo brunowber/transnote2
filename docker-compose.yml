@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  web:
+    image: registry.pmjlle.joinville.sc.gov.br:5000/ext/transnote:${CI_BUILD_REF}
+    restart: "always"
+    mem_limit: 1g
+    ports:
+      - "33000:8000"
+    environment:
+      - DB_NAME
+      - USER_DB
+      - PASSWORD_DB
+      - HOST_DB
+      - PORT_DB
