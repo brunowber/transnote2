@@ -11,7 +11,7 @@ build_image:
 tag_image:
   stage: build
   tags:
-    - pmj-webdev09
+    - pmj-docker02
     - shell
   only:
     - tags
