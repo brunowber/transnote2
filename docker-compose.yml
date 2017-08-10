@@ -2,7 +2,7 @@ version: '2'
 
 services:
   web:
-    image: registry.pmjlle.joinville.sc.gov.br:5000/ext/transnote:${CI_BUILD_REF}
+    image: registry.pmjlle.joinville.sc.gov.br:5000/ext/transnote:${CI_COMMIT_SHA}
     restart: "always"
     mem_limit: 1g
     ports:
