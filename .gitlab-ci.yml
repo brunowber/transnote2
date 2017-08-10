@@ -1,0 +1,47 @@
+build_image:
+  stage: build
+  tags:
+    - pmj-webdev09
+    - shell
+  only:
+    - master
+  script:
+    - /opt/ci/build
+
+tag_image:
+  stage: build
+  tags:
+    - pmj-webdev09
+    - shell
+  only:
+    - tags
+  script:
+    - /opt/ci/tag
+
+#----------------------------------
+
+deploy_homologacao:
+  stage: deploy
+  environment:
+    name: staging
+    url: http://transnotehomologacao.joinville.sc.gov.br
+  tags:
+    - pmj-docker02
+    - shell
+  only:
+    - master
+  script:
+    - /opt/ci/deploy
+
+deploy_producao:
+  stage: deploy
+  environment:
+    name: production
+    url: http://transnote.joinville.sc.gov.br
+  tags:
+    - pmj-docker02
+    - shell
+  only:
+    - tags
+  script:
+    - /opt/ci/deploy
