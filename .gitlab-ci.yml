@@ -26,7 +26,7 @@ deploy_homologacao:
     name: staging
     url: http://transnotehomologacao.joinville.sc.gov.br
   tags:
-    - pmj-docker02
+    - pmj-webdev09
     - shell
   only:
     - master
