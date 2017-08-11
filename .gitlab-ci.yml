@@ -18,22 +18,20 @@ tag_image:
   script:
     - /opt/ci/tag
 
-#----------------------------------
-
 deploy_homologacao:
   stage: deploy
   environment:
     name: staging
     url: http://transnotehomologacao.joinville.sc.gov.br
   tags:
-    - pmj-docker02
+    - pmj-webdev09
     - shell
   only:
     - master
   script:
     - /opt/ci/deploy
 
-deploy_producao:
+deploy_treinamento:
   stage: deploy
   environment:
     name: production
@@ -52,10 +50,9 @@ deploy_producao:
     name: production
     url: http://transnote.joinville.sc.gov.br
   tags:
-    - pmj-docker02
+    - pmj-docker01
     - shell
   only:
     - tags
   script:
     - /opt/ci/deploy
-
