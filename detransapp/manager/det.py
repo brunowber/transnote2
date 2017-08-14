@@ -17,7 +17,7 @@ class DETManager(models.Manager):
         else:
             dets = self.filter()
 
-        dets = dets.order_by('codigo')
+        dets = dets.order_by('-codigo')
 
         paginator = Paginator(dets, settings.NR_REGISTROS_PAGINA)
         try:

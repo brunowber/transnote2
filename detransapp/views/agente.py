@@ -18,7 +18,6 @@ from detransapp.rest import JSONResponse
 from detransapp.decorators import validar_imei, permissao_geral_required
 
 
-
 class CadastroAgenteView(View):
     """Classe para fazer o cadastro dos agentes"""
 
@@ -50,9 +49,11 @@ class CadastroAgenteView(View):
             form.is_active = True
             agente = form.save()
             permissao_geral = form.cleaned_data['permissao_geral']
+            permission = Permission.objects.get(codename='permissao_geral')
             if permissao_geral:
-                permission = Permission.objects.get(codename='permissao_geral')
                 agente.user_permissions.add(permission)
+            else:
+                agente.user_permissions.remove(permission)
 
             return redirect('/')
         return render(request, self.template, {'form': form})

@@ -39,6 +39,7 @@ class DownloadDetransView(APIView):
 class UploadDetransApkView(APIView):
     permission_classes = (IsAuthenticated, AllowAny)
     template = 'upload/apk.html'
+
     def get(self, request):
         cf = ConfigSinc.objects.filter()
         cf = cf[len(cf)-1]

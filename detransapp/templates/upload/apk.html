@@ -14,11 +14,12 @@
             <div class='three wide column'></div>
             <div class='ten wide column'>
 
+                {% if perms.global_permissions.permissao_geral %}
                 <form method="POST" action="{% url 'upload_apk' %}" class='ui form' enctype="multipart/form-data">
                     {% csrf_token %}
 
                     <h2 class='ui header'>
-                        <i class="fa fa-motorcycle icone"></i> Informe a APK para ser guardada
+                        <i class="fa fa-android icone"></i> Informe a APK para ser guardada
                     </h2>
                     {% if erro == 'erro_arquivo' %}
                         <div class="eight wide column ui negative message">
@@ -33,6 +34,7 @@
                             </div>
                         </div>
                     {% endif %}
+
                     <div class='fields'>
                         <div class='four wide field'>
                             <label>Arquivo</label>
@@ -51,9 +53,9 @@
 
                     <button type="submit" class="ui verde button">Salvar</button>
                 </form>
-
+                {% endif %}
                 <h2 class='ui header'>
-                    <i class="fa fa-motorcycle icone"></i> Download APK
+                    <i class="fa fa-android icone"></i> Download APK
                 </h2>
                 <a href='/download-apk/{{ down }}/'>
                     <button type="button" class="ui cancel red button">Download</button>

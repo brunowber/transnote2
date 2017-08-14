@@ -98,12 +98,18 @@ class TemplateDET(View):
 class GeraDet(View):
     template_name = 'det/gera.html'
 
-    def get(self, filtro='0', formato=''):
+    def get(self, request, filtro='0', formato=''):
 
         det = datetime.now().strftime("%Y%m%d%H%M%S")
         config = Configuracao_DET.objects.filter().order_by('-id')[0]
+        nome_det = str(request).split('/')[3]
+        if nome_det != "format":
+            id_det = DET.objects.get(codigo=nome_det)
+            sequencial_arquivo = str(id_det.id)
+        else:
+            sequencial_arquivo = str(len(DET.objects.all()) + 1)
 
-        sequencial_arquivo = str(len(DET.objects.all()) + 1)
+        print ("det", DET.objects.all())
 
         while len(sequencial_arquivo) < 6:
             sequencial_arquivo = '0' + sequencial_arquivo
