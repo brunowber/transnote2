@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from detransapp.forms.cor import FormCor
 from detransapp.forms.importacao import FormArquivo
 from detransapp.models import Cor
-from detransapp.decorators import validar_imei, permissao_geral_required
+from detransapp.decorators import validar_imei, permissao_geral_required, autenticado
 from detransapp.rest import JSONResponse
 from detransapp.serializers import CorSerializer
 
@@ -53,6 +53,7 @@ class ConsultaCorView(View):
 
     template_name = 'cor/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -75,10 +76,12 @@ class ConsultaCorView(View):
 
         return render(request, self.template_name, {'cores': cores_page, 'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
         """Pega a primeira página das cores"""
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
         """Faz a pesquisa requisitaad"""
         return self.__page(request)

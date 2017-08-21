@@ -11,13 +11,14 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from detransapp.forms.DET import FormDet
 from detransapp.models import Infracao, DET
 from detransapp.models.DET import Configuracao_DET, DET
-from detransapp.decorators import validar_imei
+from detransapp.decorators import validar_imei, permissao_geral_required, autenticado
 from detransapp.rest import JSONResponse
 
 
 class CadastroDETView(View):
     template = 'det/salvar.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request, det_id=None):
 
         det = Configuracao_DET.objects.filter()
@@ -32,6 +33,7 @@ class CadastroDETView(View):
 
         return render(request, self.template, {'form': form})
 
+    @method_decorator(permissao_geral_required())
     def post(self, request, det_id=None):
 
         det = Configuracao_DET.objects.filter()
@@ -58,6 +60,7 @@ class CadastroDETView(View):
 class ConsultaDETView(View):
     template_name = 'det/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -81,6 +84,7 @@ class ConsultaDETView(View):
         return render(request, self.template_name,
                       {'dets': det_page, 'procurar': procurar, 'formato': 0, 'formato1': 1})
 
+    @method_decorator(autenticado())
     def get(self, request):
         return self.__page(request)
 
@@ -91,6 +95,7 @@ class ConsultaDETView(View):
 class TemplateDET(View):
     template_name = 'det/template.html'
 
+    @method_decorator(autenticado())
     def get(self, request):
         return render(request, self.template_name, )
 
@@ -98,6 +103,7 @@ class TemplateDET(View):
 class GeraDet(View):
     template_name = 'det/gera.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request, filtro='0', formato=''):
 
         det = datetime.now().strftime("%Y%m%d%H%M%S")

@@ -8,7 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from detransapp.forms.config_sinc import FormConfigSinc
 from detransapp.models import ConfigSinc
-from detransapp.decorators import validar_imei
+from detransapp.decorators import validar_imei, autenticado
 from detransapp.rest import JSONResponse
 from detransapp.serializers import ConfigSincSerializer
 
@@ -18,6 +18,7 @@ class ConfigSincView(View):
 
     template = 'config/configuracao.html'
 
+    @method_decorator(autenticado())
     def get(self, request, config_sinc_id=None):
         """Pega um formulário de sincronização e envia para o template"""
 
@@ -29,6 +30,7 @@ class ConfigSincView(View):
 
         return render(request, self.template, {'form': form})
 
+    @method_decorator(autenticado())
     def post(self, request, config_sinc_id=None):
         """Envia o formulário para o servidor"""
 

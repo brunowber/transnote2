@@ -16,7 +16,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from detransapp.models import Infracao, Image, Configuracao_DET
 from detransapp.models import Infrator, Movimentacao, Dispositivo, \
     VeiculoEditado, VeiculoEstrangeiro
-from detransapp.decorators import validar_imei
+from detransapp.decorators import validar_imei, autenticado
 
 
 class RelatorioInfracaoDetalhesView(View):
@@ -45,6 +45,7 @@ class RelatorioInfracaoDetalhesView(View):
 class RelatorioInfracaoView(View):
     template = 'infracao/relatorio.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -66,10 +67,12 @@ class RelatorioInfracaoView(View):
         infracao_page = Infracao.objects.get_page(page, procurar)
         return render(request, self.template, {'infracoes': infracao_page, 'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
 
         return self.__page(request)
@@ -280,6 +283,8 @@ class ServeImage(APIView):
 
 
 class DET007(View):
+
+    @method_decorator(autenticado())
     def gerar(self):
         infracoes = Infracao.objects.all()
 

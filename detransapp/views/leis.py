@@ -1,10 +1,12 @@
 # coding: utf-8
+
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
 from detransapp.forms.lei import FormLei
 from detransapp.models.lei import Lei
-from detransapp.decorators import permissao_geral_required
+from detransapp.decorators import permissao_geral_required, autenticado
+
 
 
 class CadastroLeisView(View):
@@ -42,6 +44,7 @@ class CadastroLeisView(View):
 class ConsultaLeisView(View):
     template_name = 'leis/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -64,10 +67,12 @@ class ConsultaLeisView(View):
 
         return render(request, self.template_name, {'leis': leis_page, 'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
 
         return self.__page(request)

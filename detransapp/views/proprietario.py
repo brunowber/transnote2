@@ -4,11 +4,14 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from detransapp.forms.proprietario import FormProprietario
 from detransapp.models import Proprietario
+from django.utils.decorators import method_decorator
+from detransapp.decorators import permissao_geral_required, autenticado
 
 
 class CadastroProprietarioView(View):
     template = 'proprietario/salvar.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request, proprietario_id=None):
 
         if proprietario_id:
@@ -19,6 +22,7 @@ class CadastroProprietarioView(View):
 
         return render(request, self.template, {'form': form})
 
+    @method_decorator(permissao_geral_required())
     def post(self, request, proprietario_id=None):
 
         if proprietario_id:
@@ -39,6 +43,7 @@ class CadastroProprietarioView(View):
 class ConsultaProprietarioView(View):
     template_name = 'proprietario/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -62,10 +67,12 @@ class ConsultaProprietarioView(View):
         return render(request, self.template_name, {'proprietarios': proprietarios_page,
                                                     'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
 
         return self.__page(request)

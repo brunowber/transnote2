@@ -14,6 +14,7 @@ from detransapp.serializers import CidadeSerializer
 from detransapp.rest import JSONResponse
 from detransapp.decorators import validar_imei
 from detransapp.forms.importacao import FormArquivo
+from detransapp.decorators import permissao_geral_required
 
 
 @csrf_exempt
@@ -51,6 +52,7 @@ class ImportaCidade(View):
 
     template_name = 'cidade/importa.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request):
         """Envia um formulário para o template"""
 
@@ -58,6 +60,7 @@ class ImportaCidade(View):
 
         return render(request, self.template_name, {'form': form})
 
+    @method_decorator(permissao_geral_required())
     def post(self, request):
         """Envia o arquivo importado para o servidor"""
         arq = request.FILES['arquivo']

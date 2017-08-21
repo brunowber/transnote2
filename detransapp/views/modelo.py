@@ -10,7 +10,7 @@ from detransapp.serializers import ModeloSerializer
 from detransapp.rest import JSONResponse
 from detransapp.forms.modelo import FormModelo
 from detransapp.forms.importacao import FormArquivo
-from detransapp.decorators import validar_imei, registro_log_sinc, permissao_geral_required
+from detransapp.decorators import validar_imei, registro_log_sinc, permissao_geral_required, autenticado
 
 
 class CadastroModeloView(View):
@@ -51,6 +51,7 @@ class CadastroModeloView(View):
 class ConsultaModeloView(View):
     template_name = 'modelo/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -73,10 +74,12 @@ class ConsultaModeloView(View):
 
         return render(request, self.template_name, {'modelos': modelos_page, 'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
 
         return self.__page(request)

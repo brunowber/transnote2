@@ -3,7 +3,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
-from detransapp.decorators import permissao_geral_required
+from detransapp.decorators import permissao_geral_required, autenticado
 from detransapp.forms.dispositivo import FormDispositivo
 from detransapp.models import Dispositivo
 
@@ -48,6 +48,7 @@ class ConsultaDispositivoView(View):
 
     template_name = 'dispositivo/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -71,11 +72,13 @@ class ConsultaDispositivoView(View):
         return render(request, self.template_name, {'dispositivos': dispositivoes_page,
                                                     'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
         """Pega a primeira página"""
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
         """Pesquisa o dispositivo"""
 

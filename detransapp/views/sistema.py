@@ -4,18 +4,21 @@ from django.views.generic.base import View
 from django.shortcuts import render, redirect
 from detransapp.forms.logo_form import LogoForm
 from detransapp.models.sistema import Sistema
+from django.utils.decorators import method_decorator
+from detransapp.decorators import permissao_geral_required
 
 
 class UploadDetransLogoView(View):
-    """View que faz um upload do logo para o servidor"""
+    """View que faz um upload da logo para o servidor"""
     template = 'upload/logo.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request, sistema_id=None):
         """Envia o template para fazer a mudança do logo"""
 
-        sistema = Sistema.objects.filter()
-        if len(sistema) > 0:
-            sistema_id = sistema[0].id
+        if len(Sistema.objects.filter()) > 0:
+            sistema = Sistema.objects.last()
+            sistema_id = sistema.id
 
         if sistema_id:
             sistema = Sistema.objects.get(pk=sistema_id)
@@ -26,6 +29,7 @@ class UploadDetransLogoView(View):
 
         return render(request, self.template, {'form': form})
 
+    @method_decorator(permissao_geral_required())
     def post(self, request):
         """Envia a imagem para ser usada como logo"""
 
@@ -35,6 +39,8 @@ class UploadDetransLogoView(View):
             sistema_id = sistema[0].id
             sistema = Sistema.objects.get(pk=sistema_id)
             form = LogoForm(request.POST or None, request.FILES or None, instance=sistema)
+        else:
+            form = LogoForm(request.POST or None, request.FILES or None)
         if 'logo' in request.FILES and str(request.FILES['logo']).split('.')[-1] in arquivos:
             if form not in globals():
                 form = LogoForm(request.POST or None, request.FILES or None)

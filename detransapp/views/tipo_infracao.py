@@ -12,7 +12,7 @@ from detransapp.models import TipoInfracao
 from detransapp.models import Lei
 from detransapp.serializers import TipoInfracaoSerializer
 from detransapp.rest import JSONResponse
-from detransapp.decorators import validar_imei, permissao_geral_required
+from detransapp.decorators import validar_imei, permissao_geral_required, autenticado
 
 
 class CadastroTipoInfracaoView(View):
@@ -55,6 +55,7 @@ class ConsultaTipoInfracaoView(View):
 
     template_name = 'tipo_infracao/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
 
         procurar = ''
@@ -78,10 +79,12 @@ class ConsultaTipoInfracaoView(View):
 
         return render(request, self.template_name, {'tipos': tipos_page, 'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
 
         return self.__page(request)

@@ -15,7 +15,7 @@ from detransapp.models.agente import Agente
 from detransapp.models.agente_login import Agente_login
 from detransapp.serializers import AgenteSerializer
 from detransapp.rest import JSONResponse
-from detransapp.decorators import validar_imei, permissao_geral_required
+from detransapp.decorators import validar_imei, permissao_geral_required, autenticado
 
 
 class CadastroAgenteView(View):
@@ -64,6 +64,7 @@ class ConsultaAgenteView(View):
 
     template_name = 'agente/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -83,11 +84,13 @@ class ConsultaAgenteView(View):
         agentes_page = Agente.objects.get_page(page, procurar)
         return render(request, self.template_name, {'agentes': agentes_page, 'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
         """Pega a primeira página da consulta"""
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
         """Devolve os dados que foram procurados"""
 

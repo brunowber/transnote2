@@ -1,3 +1,4 @@
 from validacao import validar_imei
 from registro_log import registro_log_sinc
 from permissao_geral import permissao_geral_required
+from autenticado import autenticado

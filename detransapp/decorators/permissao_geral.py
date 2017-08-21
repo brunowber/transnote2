@@ -4,6 +4,7 @@ from django.shortcuts import redirect
 def permissao_geral_required():
     def _dec(view_func):
         def _view(request, *args, **kwargs):
+            print (request.user)
             if not request.user.has_perm('global_permissions.permissao_geral'):
                 print "403 - Sem permissao de acesso!"
                 return redirect('/')

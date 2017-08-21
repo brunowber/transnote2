@@ -18,9 +18,6 @@ from detransapp.forms.up_apk import UploadApkForm
 
 class DownloadDetransView(APIView):
     permission_classes = (IsAuthenticated, AllowAny)
-    # @method_decorator(login_required)
-    # @method_decorator(validar_imei())
-    # @method_decorator(registro_log_sinc(0))
 
     def get(self, request):
         filename = 'detrans.sqlite.gz'

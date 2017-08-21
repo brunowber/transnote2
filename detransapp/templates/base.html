@@ -49,6 +49,7 @@
                         </div>
                         <div class='ui divider'></div>
                     </h2>
+                    {% if perms.global_permissions.permissao_geral %}
                     <p class='hidden config'><a class="branco" href="/cria-sqlite/"><i class='icon refresh'></i>
                         Gerar Banco M&oacute;vel</a></p>
                     <p class='hidden config'><a class="branco" href="/config/get/det"><i class='icon book'></i>
@@ -59,6 +60,7 @@
                     {#                        Configurações</a></p>#}
                     <p class='hidden config'><a class="branco" href="/sistema/"><i class='icon settings'></i>
                         Configuração de Sistema</a></p>
+                    {% endif %}
                     <p class='hidden config'><a class="branco" href="/logout/"><i class='icon sign out'></i>
                         Sair</a></p>
                 </div>

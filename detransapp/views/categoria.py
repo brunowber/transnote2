@@ -9,7 +9,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from detransapp.forms.categoria import FormCategoria
 from detransapp.models import Categoria
 from detransapp.forms.importacao import FormArquivo
-from detransapp.decorators import permissao_geral_required
+from detransapp.decorators import permissao_geral_required, autenticado
 from detransapp.rest import JSONResponse
 from detransapp.serializers import CategoriaSerializer
 
@@ -55,6 +55,7 @@ class ConsultaCategoriaView(View):
 
     template_name = 'categoria/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         """Volta as páginas das categorias procuradas"""
         procurar = ''
@@ -79,11 +80,13 @@ class ConsultaCategoriaView(View):
         return render(request, self.template_name, {'categorias':
                                                         categorias_page, 'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
         """Volta a primeira página da consulta"""
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
         """Volta as categorias pesquisadas"""
 

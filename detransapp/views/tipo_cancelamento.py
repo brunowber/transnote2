@@ -5,13 +5,15 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from detransapp.forms.tipo_cancelamento import FormTipoCancelamento
 from detransapp.models import TipoCancelamento
-
+from django.utils.decorators import method_decorator
+from detransapp.decorators import permissao_geral_required, autenticado
 
 class CadastroCancelamentoView(View):
     """View para fazer CRUD dos tipos de cancelamento"""
 
     template = 'tipo_cancelamento/salvar.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request, cancelamento_id=None):
         """Envia o formulário para o template"""
 
@@ -23,6 +25,7 @@ class CadastroCancelamentoView(View):
 
         return render(request, self.template, {'form': form})
 
+    @method_decorator(permissao_geral_required())
     def post(self, request, cancelamento_id=None):
         """Envia os valores do tipo de cancelamento para o
          banco de dados"""
@@ -45,6 +48,7 @@ class CadastroCancelamentoView(View):
 class ConsultaCancelamentoView(View):
     template_name = 'tipo_cancelamento/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -68,10 +72,12 @@ class ConsultaCancelamentoView(View):
         return render(request, self.template_name, {'cancelamentos': cancelamentos_page,
                                                     'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
 
         return self.__page(request)

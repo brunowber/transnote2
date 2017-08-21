@@ -10,7 +10,7 @@ from detransapp.forms.importacao import FormArquivo
 from detransapp.models import Especie
 from detransapp.serializers import EspecieSerializer
 from detransapp.rest import JSONResponse
-from detransapp.decorators import validar_imei, permissao_geral_required
+from detransapp.decorators import validar_imei, permissao_geral_required, autenticado
 
 
 class CadastroEspecieView(View):
@@ -51,6 +51,7 @@ class CadastroEspecieView(View):
 class ConsultaEspecieView(View):
     template_name = 'especie/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -75,10 +76,12 @@ class ConsultaEspecieView(View):
         return render(request, self.template_name, {'especies': especies_page,
                                                     'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
 
         return self.__page(request)

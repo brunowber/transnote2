@@ -99,6 +99,6 @@ def index(request):
 def relatorios(request):
     return render_to_response('relatorios.html', RequestContext(request))
 
-
+@login_required
 def about(request):
     return render_to_response("sobre.html", RequestContext(request))

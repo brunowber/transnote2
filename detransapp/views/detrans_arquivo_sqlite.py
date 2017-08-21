@@ -4,13 +4,15 @@ import threading
 import sqlite3
 from datetime import datetime
 import os
-from pysqlcipher import dbapi2 as sqliteCipher
+from pysqlcipher import dbapi2 as sqliteCipher #tirar esse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.conf import settings
 from detrans_sqlite.importa import *
 from detrans_sqlite import cria_db
+from django.utils.decorators import method_decorator
+from detransapp.decorators import permissao_geral_required
 
 
 class ThreadDetransSqlite(threading.Thread):
@@ -40,9 +42,9 @@ class ThreadDetransSqlite(threading.Thread):
                 os.remove(self.detrans_sqlite_nome_execucao + '.gz')
 
             self.progress = 2
-            conn = sqliteCipher.connect(self.detrans_sqlite_nome_execucao)
+            conn = sqliteCipher.connect(self.detrans_sqlite_nome_execucao) #sqlitechipher para sqlite3
             cursor = conn.cursor()
-            cursor.execute("PRAGMA key='test'")
+            cursor.execute("PRAGMA key='test'") #essa aqui tambem
             self.progress = 3
             cria_db.criar(conn, cursor)
 
@@ -139,9 +141,11 @@ myProcess = None
 class CriaSqliteView(View):
     template = 'detrans_sqlite/cria_sqlite.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request):
         return render(request, self.template)
 
+    @method_decorator(permissao_geral_required())
     def post(self, request):
         global myProcess
 
@@ -153,9 +157,11 @@ class CriaSqliteView(View):
 class CriaSqliteCanceladoView(View):
     template = 'detrans_sqlite/cria_sqlite_cancelado.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request):
         return render(request, self.template)
 
+    @method_decorator(permissao_geral_required())
     def post(self, request):
         global myProcess
 
@@ -167,6 +173,7 @@ class CriaSqliteCanceladoView(View):
 class StatusView(View):
     template = 'detrans_sqlite/status_sqlite.html'
 
+    @method_decorator(permissao_geral_required())
     def get(self, request):
         global myProcess
 
@@ -180,6 +187,7 @@ class StatusView(View):
         return render(request, self.template, {'status': status,
                                                'erro': erro, 'status_mensagem': status_mensagem})
 
+    @method_decorator(permissao_geral_required())
     def post(self, request):
         global myProcess
 

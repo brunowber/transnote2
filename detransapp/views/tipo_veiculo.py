@@ -11,7 +11,7 @@ from detransapp.models import TipoVeiculo
 from detransapp.forms.importacao import FormArquivo
 from detransapp.serializers import TipoVeiculoSerializer
 from detransapp.rest import JSONResponse
-from detransapp.decorators import validar_imei, permissao_geral_required
+from detransapp.decorators import validar_imei, permissao_geral_required, autenticado
 
 
 class CadastroTipoView(View):
@@ -49,6 +49,7 @@ class CadastroTipoView(View):
 class ConsultaTipoView(View):
     template_name = 'tipo_veiculo/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -71,10 +72,12 @@ class ConsultaTipoView(View):
 
         return render(request, self.template_name, {'tipos': tipos_page, 'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
 
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
 
         return self.__page(request)

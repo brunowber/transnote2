@@ -12,7 +12,7 @@ from detransapp.models import Veiculo
 from detransapp.serializers import VeiculoSerializer
 from detransapp.rest import JSONResponse
 from detransapp.forms.importacao import FormArquivo
-from detransapp.decorators import validar_imei, permissao_geral_required
+from detransapp.decorators import validar_imei, permissao_geral_required, autenticado
 
 
 class CadastroVeiculoView(View):
@@ -50,6 +50,7 @@ class CadastroVeiculoView(View):
 class ConsultaVeiculoView(View):
     template_name = 'veiculo/consulta.html'
 
+    @method_decorator(autenticado())
     def __page(self, request):
         procurar = ''
 
@@ -73,9 +74,11 @@ class ConsultaVeiculoView(View):
         return render(request, self.template_name, {'veiculos': veiculos_page,
                                                     'procurar': procurar})
 
+    @method_decorator(autenticado())
     def get(self, request):
         return self.__page(request)
 
+    @method_decorator(autenticado())
     def post(self, request):
         print (request.POST)
         return self.__page(request)
