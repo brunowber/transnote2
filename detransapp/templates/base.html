@@ -42,7 +42,7 @@
                         <i class="user icon"></i>
                         <div class="content">
                             {% if user.is_superuser %}
-                                {{ request.user.first_name }}
+                                {{ request.user.first_name }}/Admin
                             {% else %}
                                 {{ request.user.first_name }}
                             {% endif %}
