@@ -4,7 +4,7 @@ import threading
 import sqlite3
 from datetime import datetime
 import os
-from pysqlcipher import dbapi2 as sqliteCipher #tirar esse
+#from pysqlcipher import dbapi2 as sqliteCipher #tirar esse
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
@@ -42,9 +42,9 @@ class ThreadDetransSqlite(threading.Thread):
                 os.remove(self.detrans_sqlite_nome_execucao + '.gz')
 
             self.progress = 2
-            conn = sqliteCipher.connect(self.detrans_sqlite_nome_execucao) #sqlitechipher para sqlite3
+            conn = sqlite3.connect(self.detrans_sqlite_nome_execucao) #sqlitechipher para sqlite3
             cursor = conn.cursor()
-            cursor.execute("PRAGMA key='test'") #essa aqui tambem
+            #cursor.execute("PRAGMA key='test'") #essa aqui tambem
             self.progress = 3
             cria_db.criar(conn, cursor)
 
@@ -193,4 +193,4 @@ class StatusView(View):
 
         myProcess.stop()
 
-        return redirect('cria-sqlite-cancelado')
+        return redirect('cria-sqlite-canc elado')
