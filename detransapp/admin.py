@@ -6,7 +6,7 @@ from detransapp.models import Cidade, Veiculo,\
     Infracao, Infrator, Agente, Movimentacao, TipoVeiculo,\
     TipoInfracao, Dispositivo, Sistema, Lei, Especie, Categoria, UF,\
     Configuracao_DET, Regiao, Modelo, Cor, DET, Agente_login, Bloco,\
-    BlocoPadrao, ConfigSinc
+    BlocoPadrao, ConfigSinc, VeiculoEditado
 
 
 admin.site.register(Cidade)
@@ -32,3 +32,4 @@ admin.site.register(Agente_login)
 admin.site.register(Bloco)
 admin.site.register(ConfigSinc)
 admin.site.register(BlocoPadrao)
+admin.site.register(VeiculoEditado)

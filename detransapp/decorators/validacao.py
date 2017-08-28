@@ -7,10 +7,8 @@ from detransapp.rest import JSONResponse
 def validar_imei():
     def _dec(view_func):
         def _view(request, *args, **kwargs):
-            print request.POST
             
             if 'imei' in request.POST:
-                print request.POST['imei']
                 dispositivo = Dispositivo.objects.existe_dispositivo(request.POST['imei'])
 
                 if dispositivo:

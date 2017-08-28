@@ -91,6 +91,7 @@ class RecebeInfracoesRestView(APIView):
 
             sid = transaction.savepoint()
             try:
+
                 is_estrangeiro = True
                 if inf_json['is_estrangeiro'] == '0':
                     is_estrangeiro = False
@@ -99,7 +100,6 @@ class RecebeInfracoesRestView(APIView):
 
                 if inf_json['is_editado'] == '0':
                     is_editado = False
-
                 is_condutor_identificado = True
 
                 if inf_json['is_condutor_identificado'] == '0':
@@ -156,6 +156,9 @@ class RecebeInfracoesRestView(APIView):
                         infrator.nome = inf_json['infrator']['nome']
                         infrator.cnh = inf_json['infrator']['cnh']
                         infrator.documento = inf_json['infrator']['documento']
+                        infrator.estado = inf_json['infrator']['estado']
+                        infrator.cidade = inf_json['infrator']['cidade']
+                        infrator.endereco = inf_json['infrator']['endereco']
                         infrator.save()
                         infracao.infrator_id = infrator.documento
                     else:

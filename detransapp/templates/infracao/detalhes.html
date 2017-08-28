@@ -181,13 +181,17 @@
                         <div class="item">
                             <label class="header label">NOME: {% if infracao.infrator.nome %} {{infracao.infrator.nome}}{% else %} Não informado {% endif %}</label>
                         </div>
+
+                        {% if infracao.infrator.cnh != "null" %}
                         <div class="item">
-                            <label class="header label">CNH/PPD: {% if infracao.infrator.nome %} {{infracao.infrator.cnh}} {% else %} Não informado {% endif %}</label>
+                            <label class="header label">CNH/PPD: {% if infracao.infrator.cnh %} {{infracao.infrator.cnh}} {% else %} Não informado {% endif %}</label>
                         </div>
+                        {% endif %}
 
                         <div class="item">
                             <label class="header label">CPF:{% if infracao.infrator.documento %} {{infracao.infrator.documento}} {% else %} Não informado {% endif %}</label>
                         </div>
+
                         <div class="item">
                             <label class="header label">ASSINATURA:</label>
                         </div>
@@ -211,6 +215,24 @@
                             <div class="item">
                                 <label class="header label">CPF / CNPJ: {% if infracao.infrator.documento %}{{infracao.infrator.documento}} {% else %} Não informado {% endif %}</label>
                             </div>
+
+                        {% if infracao.infrator.estado != "null" and infracao.infrator.estado %}
+                            <div class="item">
+                                <label class="header label">ESTADO: {{infracao.infrator.estado}} </label>
+                            </div>
+                        {% endif %}
+
+                        {% if infracao.infrator.cidade != "null" and infracao.infrator.cidade %}
+                            <div class="item">
+                                <label class="header label">CIDADE: {{infracao.infrator.cidade}} </label>
+                            </div>
+                        {% endif %}
+
+                        {% if infracao.infrator.endereco != "null" and infracao.infrator.cidade %}
+                            <div class="item">
+                                <label class="header label">ENDEREÇO: {{infracao.infrator.endereco}} </label>
+                            </div>
+                        {% endif %}
                           
                         </div>
                 </div>

@@ -4,7 +4,6 @@ from django.shortcuts import redirect
 def autenticado():
     def _dec(view_func):
         def _view(request, *args, **kwargs):
-            print (request.user)
             if str(request.user) == "AnonymousUser":
                 print "403 - Sem permissao de acesso!"
                 return redirect('/')

@@ -6,9 +6,6 @@ def leitura_log():
 
     arquivo = arq.readlines()
 
-    print arquivo[0]
-    print arquivo[1]
-
     erros = ast.literal_eval(arquivo[3])
     print "Total de erros : ", len(erros)
 
