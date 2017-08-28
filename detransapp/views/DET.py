@@ -202,7 +202,6 @@ class GeraDet(View):
                     desmembramento = cod_tipo_inf[-1]
 
                 condutor = '0'
-
                 cnh = '0' * 11
 
                 complemento = ' ' * 80
@@ -217,7 +216,6 @@ class GeraDet(View):
                         cnh = '0' * (11 - len(cnh)) + cnh
 
                 filler = ' ' * 31
-
                 infracao = tipo_registro + n_auto + i.veiculo.placa + i.veiculo.cidade.uf.sigla +\
                            i.data_infracao.strftime(
                          '%Y%m%d') + i.data_infracao.strftime(
