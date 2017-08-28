@@ -13,3 +13,9 @@ services:
       - PASSWORD_DB
       - HOST_DB
       - PORT_DB
+      - VIRTUAL_HOST
+    volumes:
+      - /mnt/documents/${VIRTUAL_HOST}/media:/media
+      - /mnt/documents/${VIRTUAL_HOST}/media/images:/media/images
+      - /mnt/documents/${VIRTUAL_HOST}/media/infracao_images:/media/infracao_images
+      - /mnt/documents/${VIRTUAL_HOST}/media/media:/media/media
