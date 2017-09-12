@@ -90,8 +90,6 @@ def diario():
 
 @login_required
 def index(request):
-    Infracao.objects.filter().delete()
-    Infrator.objects.filter().delete()
     return render_to_response("index.html", RequestContext(request, {'ultimasSinc': ultimasSinc(), 'naoSinc': naoSinc(),
                                                                      'diario': diario(), 'ultimaHora': ultimaHora(),
                                                                      'graficoInfracoes': graficoInfracoes()}))
