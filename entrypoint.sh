@@ -9,5 +9,6 @@ s/host_db/$HOST_DB/g
 s/port_db/$PORT_DB/g" ./detrans/settings/banco.py
 
 python manage.py makemigrations
+python manage.py syncdb
 python manage.py migrate
 python manage.py runserver 0.0.0.0:8000
