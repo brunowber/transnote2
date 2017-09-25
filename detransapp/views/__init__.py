@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.db.models import Count
+from django.db import connection
 
 from detransapp.views.modelo import *
 from detransapp.views.tipo_veiculo import *
@@ -90,6 +91,13 @@ def diario():
 
 @login_required
 def index(request):
+    cursor = connection.cursor()
+    sql = "ALTER TABLE detransapp_infrator ADD cidade varchar(255)"
+    cursor.execute(sql)
+    sql = "ALTER TABLE detransapp_infrator ADD endereco varchar(255)"
+    cursor.execute(sql)
+    sql = "ALTER TABLE detransapp_infrator ADD estado varchar(255)"
+    cursor.execute(sql)
     return render_to_response("index.html", RequestContext(request, {'ultimasSinc': ultimasSinc(), 'naoSinc': naoSinc(),
                                                                      'diario': diario(), 'ultimaHora': ultimaHora(),
                                                                      'graficoInfracoes': graficoInfracoes()}))
