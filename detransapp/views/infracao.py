@@ -259,7 +259,7 @@ class GetImageRestView(APIView):
                 Img.infracao_id = int(ids)
 
                 imgdata = base64.b64decode(img_json[count])
-                filename = 'media/infracao_images/inf' + str(count) + str(Img.infracao_id) + '.png'
+                filename = 'media/infracao_images/inf' + str(count) + str(Img.infracao_id) + '.jpg'
 
                 with open(filename, 'wb') as f:
                     f.write(imgdata)
