@@ -67,22 +67,22 @@
                         </div>
                         <div class="item">
                             <label class="header label">MARCA/MODELO: {% if vei.modelo %} {{ vei.modelo }} {% else %} {% if infracao.veiculo.modelo.descricao%} {{infracao.veiculo.modelo.descricao}} {% else %} Não informado {% endif %} {% endif %} </label>
-                            
+
                         </div>
 
                         <div class="item">
                             <label class="header label">ESPÉCIE: {% if vei.especie %} {{ vei.especie }} {% else %} {% if infracao.veiculo.especie.descricao %} {{infracao.veiculo.especie.descricao}} {% else %} Não informado {% endif %} {% endif %} </label>
-                    
+
                         </div>
 
                         <div class="item">
                             <label class="header label"> TIPO:{% if vei.tipo_veiculo %} {{ vei.tipo_veiculo }} {% else %} {% if infracao.veiculo.tipo_veiculo.descricao %} {{infracao.veiculo.tipo_veiculo.descricao}} {% else %} Não informado {% endif %}  {% endif %}</label>
-                            
+
                         </div>
 
                          <div class="item">
                             <label class="header label"> CATEGORIA: {% if vei.categoria %} {{ vei.categoria }} {% else %} {% if infracao.veiculo.categoria.descricao %} {{infracao.veiculo.categoria.descricao}} {% else %} Não informado {% endif %} {% endif %}</label>
-                            
+
                         </div>
                         {% if infracao.is_estrangeiro %}
                         {% else %}
@@ -103,7 +103,7 @@
                             <label class="header label"> <b>PAÍS: </b>{% if infracao.is_estrangeiro %} {% if vei.pais %} {{ vei.pais }} {% else %} Não informado {% endif %}{% else %}  BRASIL {% endif %}</label>
 
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="ui tertiary segment">
@@ -125,9 +125,9 @@
                         <div class="item">
                             <label class="header label">CÓDIGO DO MUNÍCIPIO: {{det.cod_municipio}}</label>
                         </div>
-                       
+
                         <div class="item">
-                            <label class="header label"> MUNÍCIPIO: JOINVILLE UF: SC </label> 
+                            <label class="header label"> MUNÍCIPIO: JOINVILLE UF: SC </label>
                         </div>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                         <div class="item">
                             <label class="header label">CÓDIGO / DESCRIÇÃO DA INFRAÇÃO: {%if infracao.tipo_infracao_id %}{{infracao.tipo_infracao_id}}{% else %} Não informado {% endif %} </label>
                             {{infracao.tipo_infracao.descricao}}
-                            
+
                         </div>
 
                     </div>
@@ -161,10 +161,10 @@
                 <div class="ui secondary segment">
                     <div class="ui divided list">
                         <div class="item">
-                            <label class="header label">MATRÍCULA: {{infracao.agente.identificacao}}</label>   
+                            <label class="header label">MATRÍCULA: {{infracao.agente.identificacao}}</label>
                         </div>
                          <div class="item">
-                            <label class="header label">ASSINATURA:</label>   
+                            <label class="header label">ASSINATURA:</label>
                         </div>
                     </div>
                 </div>
@@ -211,7 +211,7 @@
                             <div class="item">
                                 <label class="header label">NOME:{% if infracao.infrator.nome %} {{infracao.infrator.nome}} {% else %} Não informado {% endif %}</label>
                             </div>
-                           
+
                             <div class="item">
                                 <label class="header label">CPF / CNPJ: {% if infracao.infrator.documento %}{{infracao.infrator.documento}} {% else %} Não informado {% endif %}</label>
                             </div>
@@ -233,7 +233,7 @@
                                 <label class="header label">ENDEREÇO: {{infracao.infrator.endereco}} </label>
                             </div>
                         {% endif %}
-                          
+
                         </div>
                 </div>
                 <div class="ui tertiary segment">
@@ -250,7 +250,7 @@
                                 {% if infracao.motivo_cancelamento != None %}Cancelado por: {{ infracao.motivo_cancelamento }}
                                 {% elif infracao.obs %}{{infracao.obs}}{% else %} Não informado {% endif %}
                             </div>
-                                                    
+
                     </div>
                 </div>
                 <div class="ui tertiary segment">
@@ -262,9 +262,9 @@
                     </h3>
                 </div>
                 <div class="ui secondary segment">
-                    <div class="ui big images anexo">
+                    <div class="ui medium images anexo">
                         {% for img in imagens %}
-                        <img src="/{{img.photo}}">
+                        <a href="/{{img.photo}}" data-lightbox="gallery"> <img src="/{{img.photo}}"></a>
                         {% endfor %}
                     </div>
                 </div>
