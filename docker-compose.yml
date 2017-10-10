@@ -3,6 +3,7 @@ version: '2'
 services:
   web:
     image: registry.pmjlle.joinville.sc.gov.br:5000/ext/transnote:${CI_COMMIT_SHA}
+    network_mode: bridge
     restart: "always"
     mem_limit: 1g
     ports:
