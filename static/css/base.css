@@ -18,12 +18,12 @@ body {
 
 
 header{
-    /*min-height:17%;*/
+    min-height:7%;
     margin-bottom:1%;
 }
 article{
     min-height:62.5%;
-    margin-bottom: 17%;
+    margin-bottom: 10%;
 }
 footer{
     min-height:20%;
