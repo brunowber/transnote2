@@ -7,16 +7,31 @@
 
 /*=============ALTURAS DE POSICIONAMENTO DE RODAPE==============*/
 
+html,
+body {
+   margin:0;
+   padding:0;
+   height:100%;
+   min-height:100%;
+   position:relative;
+}
+
+
 header{
-    min-height:20%;
+    /*min-height:17%;*/
     margin-bottom:1%;
 }
 article{
     min-height:62.5%;
+    margin-bottom: 17%;
 }
 footer{
-    min-height:12%;
+    min-height:20%;
+   bottom:0;
+   width:100%;
+   height:auto;
 }
+
 
 /*===========================GERAL==============================*/
 .logout{
@@ -79,6 +94,13 @@ i.inverted.circular.icon.verde{
     color:#005e83;
     font-size: 18px;
 }
+.crop{
+  width : 100px;
+  overflow:hidden;
+  display:inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 
  h2.ui.header.fazul, .h2.ui.header.vermelho,.h2.ui.header.fverde {
   font-size: 1.5rem !important;
@@ -109,12 +131,12 @@ label.header.label{
 .esquerda{
     float:left!important;
 }
-.usuario{
-    position:absolute !important;
-    right: 0 !important;
-    margin-top: 0% !important;
-    z-index:99 !important;
-}
+/*.usuario{*/
+    /*position:absolute !important;*/
+    /*!*right: 0 !important;*!*/
+    /*!*margin-top: 0% !important;*!*/
+    /*!*z-index:99 !important;*!*/
+/*}*/
 
 .ui.header.cazul{
     cursor:pointer;
@@ -125,12 +147,12 @@ label.header.label{
 }
 a.branco, .branco {
     color:#fff;
-    font-size: 18px;
+    /*font-size: 18px;*/
 }
 
 a.branco:hover{
     color:#fff;
-    font-size: 18px;
+    /*font-size: 18px;*/
     text-decoration: underline;
 }
 
@@ -150,7 +172,6 @@ a.branco:hover{
 .item.oculta{
     display: none !important;
 }
-
 
 /*===========================HOME==============================*/
 i.inverted.verde.icon{
@@ -181,6 +202,7 @@ i.inverted.verde.icon{
 .tazul tbody tr:nth-child(2n) {
   background-color: rgba(98, 154, 177, 1) !important;
 }
+
 
 /*=====================ICONES DE CADASTRO================= */
 
@@ -312,6 +334,15 @@ footer{
     padding:0 !important;
 }
 
+.wrap {
+    height: auto;
+    margin: 0 auto -80px; /* footer height + space */
+    min-height: 20%;
+    padding: 0 0 10px; /* footer height + space */
+    box-sizing: border-box;
+    overflow: auto;
+}
+
 footer.ui.stackable.grid{
 
     background-color: #005e83;
@@ -345,3 +376,40 @@ figure.fabrica{
 .item > p.header{
     padding: 0 30px 0 30px;
 }
+
+/*@media(max-width: 1px) {*/
+
+   /*.texto{*/
+      /*font-size: 0.4em;*/
+   /*}*/
+
+/*}*/
+
+/*======================== TELAS ==============================*/
+
+@media (min-width: 1281px) {
+    .usuario{
+    position:absolute !important;
+    right: 0 !important;
+    margin-top: 0% !important;
+    z-index:99 !important;
+}}
+@media (min-width: 1025px) and (max-width: 1280px) {
+    .usuario{
+    position:absolute !important;
+    right: 0 !important;
+    margin-top: 0% !important;
+    z-index:99 !important;
+}
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+    .usuario{
+    position:absolute !important;
+    right: 0 !important;
+    margin-top: 0% !important;
+    z-index:99 !important;
+}}
+/*@media (min-width: 600px) and (max-width: 768px) {.texto{font-size: 0.2em;}.diminuir{font-size: 0.35em;}}*/
+/*@media (min-width: 550px) and (max-width: 599px) {.texto{font-size: 0.1em;  }.diminuir{font-size: 0.25em;}}*/
+/*@media (min-width: 401px) and (max-width: 549px) {.texto{font-size: 0.1em;  }.diminuir{font-size: 0.3em;}}*/
+/*@media (min-width: 1px) and (max-width: 400px) {.texto{font-size: 0.1em;  }.sumir{visibility:hidden;}.diminuir{font-size: 0.09em;}}*/

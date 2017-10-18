@@ -14,7 +14,7 @@
 
 <div class='ui stackable grid' id='container'>
     <div class='row'>
-        <div class='three wide column'>
+        <div class='three wide computer column four wide tablet column'>
             <div class='ui secondary vertical menu paineis'>
                 <h4 class='ui header item'> Painéis
                     <p class='sub header'> Ative os painéis abaixo</p>
@@ -48,7 +48,7 @@
                 </a> -->
             </div>
         </div>
-        <div class='twelve wide column'>
+        <div class='thirteen wide computer column twelve wide tablet column '>
             {% if perms.global_permissions.permissao_geral %}
             <div class="ui success message">
                 <span class="header">Atenção</span>
@@ -62,7 +62,7 @@
             {% endif %}
 
             <div class='ui grid stackable relaxed'>
-                <div class='five wide column ultimaSincronizacoes '>
+                <div class='eight wide column ultimaSincronizacoes '>
                     <div class='ui segment dash'>
                         <div class='ui center aligned header small'> Últimas sincronizações</div>
                         {% if ultimasSinc %}
@@ -91,7 +91,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class='five wide column agentesNaoSincronizados'>
+                <div class='eight wide column agentesNaoSincronizados'>
                     <div class='ui segment dash'>
                         <div class='ui center aligned small header'> Agentes não Sincronizados</div>
                         {% if naoSinc %}
@@ -130,7 +130,7 @@
                         <div id="grafico"></div>
                       </div>
                 </div> -->
-                <div class='five wide column infracoesUltimaHora'>
+                <div class='eight wide column infracoesUltimaHora'>
                     <div class='ui segment dash'>
                         <div class='ui center aligned small header'>Infraç&otilde;es na &Uacute;ltima Hora</div>
                         {% if ultimaHora %}
@@ -157,7 +157,7 @@
                         {% endif %}
                     </div>
                 </div>
-                <div class='five wide column infracoesMensal'>
+                <div class='eight wide column infracoesMensal'>
                     <div class='ui segment dash center aligned'>
                         <div class='ui center aligned small header'>Infraç&otilde;es Di&aacute;rio</div>
                         {% if diario %}

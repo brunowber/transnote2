@@ -23,8 +23,8 @@
 </head>
 <body>
 <header>
-    <div class="ui grid">
-        <div class="thirteen wide column">
+    <div class="ui grid ">
+        <div class="ui eleven wide computer column ten wide tablet column sixteen wide mobile column">
             <div id='topo'>
                 <a href='/'>
                     <h2 class='ui header linklogo'>
@@ -38,11 +38,11 @@
             </div>
         </div>
         {% if user.is_authenticated %}
-            <div class='ui three wide column usuario'>
+            <div class='ui five wide computer column  six wide tablet column sixteen wide mobile column usuario crop'>
                 <div class="ui blue inverted segment cazul">
-                    <h2 class="ui header cazul" id="config">
-                        <i class="user icon"></i>
-                        <div class="content">
+                    <h2 class="ui header cazul " id="config">
+                        <i class="user icon sumir"></i>
+                        <div class="content texto">
                             {% if user.is_superuser %}
                                 Administrador
                             {% else %}
@@ -52,14 +52,16 @@
                         <div class='ui divider'></div>
                     </h2>
                     {% if perms.global_permissions.permissao_geral %}
-                    <p class='hidden config'><a class="branco" href="/cria-sqlite/"><i class='icon refresh'></i>
+                    <p class='hidden config '><a class="branco" href="/cria-sqlite/"><i class='icon refresh'></i>
                         Gerar Banco M&oacute;vel</a></p>
                     <p class='hidden config'><a class="branco" href="/config/get/det"><i class='icon book'></i>
                         Consulta de DET007</a></p>
                     <p class='hidden config'><a class="branco" href="/config/set/det"><i class='icon list layout'></i>
                         Edição de DET007</a></p>
-                    {#                    <p class='hidden config'><a class="branco" href="/configuracoes/"><i class='icon settings'></i>#}
-                    {#                        Configurações</a></p>#}
+
+                    <!--{#                    <p class='hidden config texto'><a class="branco" href="/configuracoes/"><i class='icon settings'></i>#}-->
+                    <!--{#                        Configurações</a></p>#}-->
+
                     <p class='hidden config'><a class="branco" href="/sistema/"><i class='icon settings'></i>
                         Configuração de Sistema</a></p>
                     {% endif %}
@@ -71,7 +73,7 @@
         <nav class='ui menu azul inverted large'>
 
             <a class='{% block home %}{% endblock %}' href='/'> Home </a>
-            <a class='{% block cadastros %}{% endblock %}' href='/relatorios/'> Cadastros e Relat&oacute;rios</a>
+            <a class='{% block cadastros %}{% endblock %} ' href='/relatorios/'> Cadastros e Relat&oacute;rios</a>
             <div class="right menu">
                 <a class="{% block sobre %}{% endblock %}" href="/sobre/">
                     Sobre
@@ -86,12 +88,12 @@
     {% block result %}
     {% endblock %}
 </article>
-<footer id="footer" class='ui stackable grid '>
+<footer id="footer" class='ui stackable grid wrap'>
     <div class="middle aligned row ">
         <div class='three wide column'>
-            <figure class="banner">
+            <!--<figure class="banner center">-->
                 <img src="{{ STATIC_URL }}/img/prefj.png" alt='Fàbrica de Software' width='75px'>
-            </figure>
+            <!--</figure>-->
         </div>
         <div class='ten wide column'>
             <h4 class='ui header foot'> Prefeitura de Joinville
