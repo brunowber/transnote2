@@ -56,6 +56,7 @@ class CadastroAgenteView(View):
                 agente.user_permissions.remove(permission)
 
             return redirect('/')
+
         return render(request, self.template, {'form': form})
 
 

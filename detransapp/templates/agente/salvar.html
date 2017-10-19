@@ -9,6 +9,7 @@
 {% block op2 %} item {% endblock %}
 
 {% block result %}
+
 <div class='ui grid'>
     <div class='row'>
         <div class='three wide column'></div>
@@ -22,9 +23,20 @@
                     <h2 class='ui header'>
                         <i class="fa fa-user-secret icone"></i>Cadastro de Agente
                         <div class='sub header'>Prencha os campos abaixo.</div>
-
                     </h2>
-
+                    <div class="ui info message">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    A Senha deve conter:
+                                </div>
+                                <ul class="list">
+                                    <li>8 Digítos;</li>
+                                    <li>1 Letra maiscula;</li>
+                                    <li>1 Letra minuscula;</li>
+                                    <li>1 Número;</li>
+                                    <li>1 Caractere especial;</li>
+                                </ul>
+                            </div>
                     <div class="two fields">
                         <div class="field">
                             <label>Nome</label>
@@ -38,17 +50,18 @@
 
                         </div>
                         <div class='field'>
-                             <label>Identificação</label>
+                            <label>Identificação</label>
                             {% if not form.instance.id %}
-                                {{ form.identificacao }}
+                            {{ form.identificacao }}
                             {% if form.identificacao.errors %}
-                                <div class="ui red pointing label">
-                                    {{ form.identificacao.errors }}
-                                 </div>
-                            {%  endif %}
+                            <div class="ui red pointing label">
+                                {{ form.identificacao.errors }}
+                            </div>
+                            {% endif %}
                             {% else %}
-                                <!--<input type="text" value="{{ form.instance.id }}" disabled/>-->
-                                <input id="identificacao" maxlength="6" name="identificacao" type="text" value="{{ form.instance}}" readonly="readonly" />
+                            <!--<input type="text" value="{{ form.instance.id }}" disabled/>-->
+                            <input id="identificacao" maxlength="6" name="identificacao" type="text"
+                                   value="{{ form.instance}}" readonly="readonly"/>
 
                             {% endif %}
                             {% if form.identificacao.errors %}
@@ -70,6 +83,7 @@
                             {% endif %}
 
                         </div>
+
                         <div class="field">
                             <label>Senha</label>
 
@@ -93,7 +107,7 @@
                         {% endif %}
 
                     </div>
-                    
+
                     <div class="field">
                         <label>Ativo</label>
 
@@ -118,7 +132,6 @@
                     </div>
 
 
-                    
                     <a href='/relatorios/'>
                         <button type="button" class="ui cancel red button">Cancelar</button>
                     </a>
@@ -128,5 +141,10 @@
     </div>
 </div>
 
+<script>
+    $('.message .close').on('click', function () {
+        $(this).parent().fadeOut();
+    });
+</script>
 
 {% endblock %}
