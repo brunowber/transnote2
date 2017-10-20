@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 """Formulario de agentes"""
 
+import string
 from django import forms
 from detransapp.models import Agente
 
@@ -9,7 +10,7 @@ from detransapp.models import Agente
 class FormAgente(forms.ModelForm):
     """Classes para agentes"""
 
-    password = forms.CharField(widget=forms.PasswordInput)
+    password = forms.CharField(widget=forms.PasswordInput, max_length=30)
     permissao_geral = forms.BooleanField(initial=False, required=False)
 
     def save(self, commit=True):
@@ -20,43 +21,57 @@ class FormAgente(forms.ModelForm):
         return agente
 
     def clean(self):
-        cont = 0
         try:
             senha = self.cleaned_data['password']
-            print senha
-        except Exception as e:
-            print e
+            if len(senha) < 8:
+                msg = 'Senha possui tem que possuir ao menos 8 digítos.'
+                self._errors['password'] = self.error_class([msg])
+            cont, decimal, upper, lower, symbol = 0, True, True, True, True
+            for digito in senha:
+                if digito.isdecimal() and decimal:
+                    cont += 1
+                    decimal = False
+                if digito.isupper() and upper:
+                    cont += 1
+                    upper = False
+                if digito.islower() and lower:
+                    cont += 1
+                    lower = False
+                if digito in string.punctuation and symbol:
+                    cont += 1
+                    symbol = False
+            if cont < 3:
+                msg = 'Senha muito simples, tente outra.'
+                self._errors['password'] = self.error_class([msg])
+        except Exception:
             msg = 'Este campo é obrigatório.'
             self._errors['password'] = self.error_class([msg])
-            raise forms.ValidationError("")
-        if senha in self.cleaned_data['first_name']:
-            msg = 'Seu nome não pode conter na senha.'
-            self._errors['password'] = self.error_class([msg])
-        if len(senha) < 8:
-            msg = 'Senha possui tem que possuir ao menos 8 digítos.'
-            self._errors['password'] = self.error_class([msg])
-        for digito in senha:
-            if digito.isdecimal():
-                cont += 1
-                break
-        for digito in senha:
-            if digito.isupper():
-                cont += 1
-                break
-        for digito in senha:
-            if digito.islower():
-                cont += 1
-                break
-        for digito in senha:
-            if digito in "!@#$%*.":
-                cont += 1
-                break
-        if cont < 2:
-            msg = 'Senha muito simples, tente outra.'
-            self._errors['password'] = self.error_class([msg])
+        try:
+            nome = self.cleaned_data['first_name']
+            if nome == "":
+                msg = "Este campo é obrigatório."
+                self._errors['first_name'] = self.error_class([msg])
+
+            for digito in nome:
+                if digito.isdecimal():
+                    msg = "Nome deve conter apenas letras."
+                    self._errors['first_name'] = self.error_class([msg])
+        except Exception:
+            print 'excpet'
+            msg = 'Este campo é obrigatório.'
+            self._errors['first_name'] = self.error_class([msg])
+        try:
+            if nome in senha and nome != "":
+                msg = 'Seu nome não pode conter na senha.'
+                self._errors['password'] = self.error_class([msg])
+        except Exception:
+            print ("sem nome ou senha")
 
     def clean_cpf(self):
         cpf = self.cleaned_data['cpf']
+        for digito in cpf:
+            if not digito.isdecimal():
+                raise forms.ValidationError("CPF deve conter somente números.")
         if Agente.objects.filter(cpf=cpf).exists():
             raise forms.ValidationError("Esse CPF já existe.")
         if len(cpf) != 11:
@@ -70,6 +85,23 @@ class FormAgente(forms.ModelForm):
         if not ((int(cpf[9]) == (11 - d1 if d1 > 1 else 0)) and (int(cpf[10]) == (11 - d2 if d2 > 1 else 0))):
             raise forms.ValidationError("CPF inválido")
         return cpf
+
+    def clean_identificacao(self):
+        identificacao = self.cleaned_data['identificacao']
+        for digito in identificacao:
+            if not digito.isdecimal():
+                raise forms.ValidationError("Identificação deve conter somente números.")
+        if Agente.objects.filter(identificacao=identificacao).exists():
+            raise forms.ValidationError("Essa identificação já está em uso.")
+        agente = Agente.objects.filter()
+        for i in agente:
+            print i.identificacao
+        return identificacao
+
+    def clean_username(self):
+        username = self.cleaned_data['username']
+        if len(username) < 8:
+            raise forms.ValidationError("Usuário dever conter ao menos 8 dígitos.")
 
     class Meta:
         model = Agente
