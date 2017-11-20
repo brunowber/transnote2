@@ -8,24 +8,24 @@ def importa(self, conn, cursor, stopthread):
     count = 1
 
     while not stopthread.isSet():
-        self.progress =int( float(((count*100) / (num_pages+20))))+20
+        self.progress = int(float(((count * 100) / (num_pages + 20)))) + 20
 
         tupla_veiculos = []
         for veiculo in veiculos:
             tupla_veiculos.append((veiculo.renavam,
-                                       veiculo.chassi,
-                                       veiculo.nr_motor,
-                                       veiculo.placa,
-                                       veiculo.modelo_id,
-                                       veiculo.tipo_veiculo_id,
-                                       veiculo.especie_id,
-                                       veiculo.cidade_id,
-                                       veiculo.cor_id,
-                                       veiculo.categoria_id,
-                                       veiculo.ano_fabricacao,
-                                       veiculo.ano_modelo,
-                                       veiculo.num_passageiro,
-                                       veiculo.cidade_id))
+                                   veiculo.chassi,
+                                   veiculo.nr_motor,
+                                   veiculo.placa,
+                                   veiculo.modelo_id,
+                                   veiculo.tipo_veiculo_id,
+                                   veiculo.especie_id,
+                                   veiculo.cidade_id,
+                                   veiculo.cor_id,
+                                   veiculo.categoria_id,
+                                   veiculo.ano_fabricacao,
+                                   veiculo.ano_modelo,
+                                   veiculo.num_passageiro,
+                                   veiculo.cidade_id))
 
             if stopthread.isSet():
                 raise ValueError('Geração detrans.sqlite cancelada, parada ao importar "Veiculo"')
