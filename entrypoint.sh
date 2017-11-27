@@ -8,7 +8,6 @@ s/password_db/$PASSWORD_DB/g
 s/host_db/$HOST_DB/g
 s/port_db/$PORT_DB/g" ./detrans/settings/banco.py
 
-pip install -r requirements.txt
 python manage.py makemigrations
 python manage.py syncdb
 python manage.py migrate
