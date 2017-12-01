@@ -11,7 +11,7 @@ class DispositivoManager(models.Manager):
 
     def existe_dispositivo(self, imei):
 
-        return self.filter(imei=imei, ativo=True).first() is not None
+        return self.filter(imei=imei).first() is not None
 
     def get_page(self, page, procurar):
 

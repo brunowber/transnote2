@@ -1,6 +1,6 @@
 from rest_framework import status
 
-from detransapp.models import Dispositivo
+from detransapp.models import Dispositivo, Acesso
 from detransapp.rest import JSONResponse
 
 
@@ -9,10 +9,13 @@ def validar_imei():
         def _view(request, *args, **kwargs):
             
             if 'imei' in request.POST:
+                print request.POST['imei']
                 dispositivo = Dispositivo.objects.existe_dispositivo(request.POST['imei'])
 
                 if dispositivo:
                     return view_func(request, *args, **kwargs)
+                else:
+                    Acesso.objects.get_or_create(imei=request.POST['imei'])
 
             return JSONResponse({'status': 'Dispositivo nao encontrado!'},
                                 status=status.HTTP_403_FORBIDDEN)

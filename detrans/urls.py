@@ -6,25 +6,26 @@ from django.conf.urls.static import static
 from rest_framework.urlpatterns import format_suffix_patterns
 from detransapp import views
 from detransapp.views import settings, CadastroLeisView, \
-    ConsultaLeisView, CadastroModeloView, ConsultaModeloView, CadastroTipoView,\
-    ConsultaTipoView, CadastroTipoInfracaoView, ConsultaTipoInfracaoView,\
-    CadastroCancelamentoView, ConsultaCancelamentoView, CarregaTiposInfracao,\
-    CadastroEspecieView, ConsultaEspecieView, CadastroAgenteView, ConsultaAgenteView,\
-    DesbloqueioAgenteView, CadastroCorView, ConsultaCorView, CadastroCategoriaView,\
-    ConsultaCategoriaView, CadastroDispositivoView, ConsultaDispositivoView,\
-    CadastroVeiculoView, ConsultaVeiculoView, CadastroProprietarioView,\
-    ConsultaProprietarioView, CadastroBlocoView, ConsultaBlocoView,\
-    RelatorioInfracaoView, RelatorioInfracaoDetalhesView, UploadDetransLogoView,\
-    DownloadDetransView, UploadDetransApkView, DownloadDetransApkView,\
-    GetAutuadorRestView, GetBlocoRestView, GetAgentesRestView,\
-    GetControlLoginRestView, GetVeiculosRestView, GetTiposInfracaoRestView,\
-    GetTiposVeiculoRestView, GetModelosRestView, GetEspeciesRestView,\
-    GetCategoriasRestView, GetCoresRestView, GetRegioesRestView, GetUFsRestView,\
-    GetCidadesRestView, SincronismoRestView, RecebeInfracoesRestView,\
-    GetConfigSincRestView, GetLoginVerifyRestView, ImportaCor, ImportaCategoria,\
-    ImportaEspecie, ImportaCidade, ImportaTipoVeiculo, ImportaModelo,\
-    ImportaVeiculo, CriaSqliteView, CriaSqliteCanceladoView, StatusView,\
-    CadastroDETView, ConsultaDETView, GeraDet, ConfigSincView, TemplateDET
+    ConsultaLeisView, CadastroModeloView, ConsultaModeloView, CadastroTipoView, \
+    ConsultaTipoView, CadastroTipoInfracaoView, ConsultaTipoInfracaoView, \
+    CadastroCancelamentoView, ConsultaCancelamentoView, CarregaTiposInfracao, \
+    CadastroEspecieView, ConsultaEspecieView, CadastroAgenteView, ConsultaAgenteView, \
+    DesbloqueioAgenteView, CadastroCorView, ConsultaCorView, CadastroCategoriaView, \
+    ConsultaCategoriaView, CadastroDispositivoView, ConsultaDispositivoView, \
+    CadastroVeiculoView, ConsultaVeiculoView, CadastroProprietarioView, \
+    ConsultaProprietarioView, CadastroBlocoView, ConsultaBlocoView, \
+    RelatorioInfracaoView, RelatorioInfracaoDetalhesView, UploadDetransLogoView, \
+    DownloadDetransView, UploadDetransApkView, DownloadDetransApkView, \
+    GetAutuadorRestView, GetBlocoRestView, GetAgentesRestView, \
+    GetControlLoginRestView, GetVeiculosRestView, GetTiposInfracaoRestView, \
+    GetTiposVeiculoRestView, GetModelosRestView, GetEspeciesRestView, \
+    GetCategoriasRestView, GetCoresRestView, GetRegioesRestView, GetUFsRestView, \
+    GetCidadesRestView, SincronismoRestView, RecebeInfracoesRestView, \
+    GetConfigSincRestView, GetLoginVerifyRestView, ImportaCor, ImportaCategoria, \
+    ImportaEspecie, ImportaCidade, ImportaTipoVeiculo, ImportaModelo, \
+    ImportaVeiculo, CriaSqliteView, CriaSqliteCanceladoView, StatusView, \
+    CadastroDETView, ConsultaDETView, GeraDet, ConfigSincView, TemplateDET, ConsultaDispositivoAcessoView, \
+    CadastroDispositivoAcessoView, RemoveDispositivoAcessoView
 
 from detransapp.views.infracao import GetImageRestView
 
@@ -119,11 +120,17 @@ urlpatterns = patterns('',
 
                        url(r'^dispositivo/$', CadastroDispositivoView.as_view(),
                            name='cad-dispositivo'),
+                       url(r'^acesso/(?P<dispositivo_id>\d+)/$', CadastroDispositivoAcessoView.as_view(),
+                           name='cad-acesso'),
+                       url(r'^remove_acesso/(?P<dispositivo_id>\d+)/$', RemoveDispositivoAcessoView.as_view(),
+                           name='remove-acesso'),
                        url(r'^dispositivo/(?P<dispositivo_id>\d+)/$',
                            CadastroDispositivoView.as_view(),
                            name='cad-dispositivo'),
                        url(r'^dispositivo/consulta/$', ConsultaDispositivoView.as_view(),
                            name='dispositivo-consulta'),
+                       url(r'^dispositivo/acesso/$', ConsultaDispositivoAcessoView.as_view(),
+                           name='dispositivo-acesso'),
 
                        url(r'^veiculo/$', CadastroVeiculoView.as_view(), name='cad-veiculo'),
                        url(r'^veiculo/(?P<veiculo_id>\d+)/$', CadastroVeiculoView.as_view(),
@@ -242,7 +249,7 @@ urlpatterns = patterns('',
                        url(r'^configuracoes/$', ConfigSincView.as_view(),
                            name='config'),
                        url(r'^config/det$', TemplateDET.as_view(),
-                           name='template-det'),)\
+                           name='template-det'), ) \
               + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 urlpatterns = format_suffix_patterns(urlpatterns)

@@ -7,233 +7,259 @@
 
 
 {% block result %}
-<div class='ui grid'>
-    <div class='row'>
-        <div class='one wide column'></div>
-        <div class='fourteen wide column'>
-            <h2 class='ui header'>
-                Cadastros e Relat&oacute;rios
-                <div class='sub header'>Selecione abaixo</div>
-            </h2>
-            <div class='ui stackable grid'>
-                <div class='ui center aligned row'>
-                    <div class='ui four wide column'>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="agente">
-                                <i class="fa fa-user-secret icone icon"></i>
-                                <div class='content'>
-                                    Agente
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden agente'><a href="/agente/"><i class='icon edit'></i> Cadastros</a></p>
-                            <p class='bloco hidden agente'><a href="/agente/desbloqueio/"><i class='icon edit'></i>Desativar Login de Agente</a></p>
-                            {% endif %}
-                            <p class='bloco hidden agente'><a href="/agente/consulta/"><i class='icon list'></i> Relat&oacute;rios</a></p>
+    <div class='ui grid'>
+        <div class='row'>
+            <div class='one wide column'></div>
+            <div class='fourteen wide column'>
+                <h2 class='ui header'>
+                    Cadastros e Relat&oacute;rios
+                    <div class='sub header'>Selecione abaixo</div>
+                </h2>
+                <div class='ui stackable grid'>
+                    <div class='ui center aligned row'>
+                        <div class='ui four wide column'>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="agente">
+                                    <i class="fa fa-user-secret icone icon"></i>
+                                    <div class='content'>
+                                        Agente
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden agente'><a href="/agente/"><i class='icon edit'></i>
+                                        Cadastros</a></p>
+                                    <p class='bloco hidden agente'><a href="/agente/desbloqueio/"><i
+                                            class='icon edit'></i>Desativar Login de Agente</a></p>
+                                {% endif %}
+                                <p class='bloco hidden agente'><a href="/agente/consulta/"><i class='icon list'></i>
+                                    Relat&oacute;rios</a></p>
+                            </div>
+                        </div>
+                        <div class='ui four wide column '>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="blocodetrans">
+                                    <i class="edit icon"></i>
+                                    <div class="content">
+                                        Bloco Mestre
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden blocodetrans'><a href="/bloco/"><i class='icon edit'></i>Cadastros</a>
+                                    </p>
+                                {% endif %}
+                                <p class='bloco hidden blocodetrans'><a href="/bloco/consulta/"><i
+                                        class='icon list'></i> Relat&oacute;rios</a></p>
+                            </div>
+                        </div>
+                        <div class='ui four wide column '>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="categoria">
+                                    <i class="book icon"></i>
+                                    <div class="content">
+                                        Categoria
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden categoria'><a href="/categoria/"><i class='icon edit'></i>
+                                        Cadastros</a></p>
+                                    <p class='bloco hidden categoria'><a href="/importa/categoria/"><i
+                                            class='icon upload'></i>
+                                        Importação</a></p>
+                                {% endif %}
+                                <p class='bloco hidden categoria'><a href="/categoria/consulta/"><i
+                                        class='icon list'></i>
+                                    Relat&oacute;rios</a></p>
+                            </div>
+                        </div>
+                        <div class='ui four wide column '>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="cor">
+                                    <i class="paint brush icon"></i>
+                                    <div class="content">
+                                        Cor
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden cor'><a href="/cor/"><i class='icon edit'></i> Cadastros</a>
+                                    </p>
+                                    <p class='bloco hidden cor'><a href="/importa/cor/"><i class='icon upload'></i>Importação</a>
+                                    </p>
+                                {% endif %}
+                                <p class='bloco hidden cor'><a href="/cor/consulta/"><i class='icon list'></i> Relat&oacute;rios</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class='ui four wide column '>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="blocodetrans">
-                                <i class="edit icon"></i>
-                                <div class="content">
-                                    Bloco Mestre
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden blocodetrans'><a href="/bloco/"><i class='icon edit'></i>Cadastros</a></p>
-                            {% endif %}
-                            <p class='bloco hidden blocodetrans'><a href="/bloco/consulta/"><i class='icon list'></i> Relat&oacute;rios</a></p>
+                    <div class='ui center aligned row'>
+                        <div class='ui four wide column'>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="dispositivo">
+                                    <i class="tablet icon"></i>
+                                    <div class="content">
+                                        Dispositivo
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden dispositivo'><a href="/dispositivo/"><i
+                                            class='icon edit'></i>
+                                        Cadastros</a></p>
+                                    <p class='bloco hidden dispositivo'><a href="/dispositivo/acesso/"><i
+                                            class="unlock icon"></i>
+                                        Acessos</a></p>
+                                {% endif %}
+                                <p class='bloco hidden dispositivo'><a href="/dispositivo/consulta/"><i
+                                        class='icon list'></i> Relat&oacute;rios</a></p>
+                            </div>
+                        </div>
+                        <div class='ui four wide column'>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="especie">
+                                    <i class="fa fa-truck icone "></i>
+                                    <div class="content">
+                                        Esp&eacute;cie
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden especie'><a href="/especie/"><i class='icon edit'></i>
+                                        Cadastros</a>
+                                    </p>
+                                    <p class='bloco hidden especie'><a href="/importa/especie/"><i
+                                            class='icon upload'></i>
+                                        Importação</a></p>
+                                {% endif %}
+                                <p class='bloco hidden especie'><a href="/especie/consulta/"><i class='icon list'></i>
+                                    Relat&oacute;rios</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class='ui four wide column'>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id='infracao'>
+                                    <i class="browser icon"></i>
+                                    <div class="content">
+                                        Infração
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                <p class='bloco hidden infracao'><a href="/infracao/relatorio/"><i
+                                        class='icon list'></i>
+                                    Relat&oacute;rios</a></p>
+                            </div>
+                        </div>
+                        <div class='ui four wide column'>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="lei">
+                                    <i class="legal icon "></i>
+                                    <div class="content">
+                                        Legislação
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden lei'><a href="/legislacao/"><i class='icon edit'></i>
+                                        Cadastros</a>
+                                    </p>
+                                {% endif %}
+                                <p class='bloco hidden lei'><a href="/legislacao/consulta/"><i class='icon list'></i>
+                                    Relat&oacute;rios</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div class='ui four wide column '>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="categoria">
-                                <i class="book icon"></i>
-                                <div class="content">
-                                    Categoria
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden categoria'><a href="/categoria/"><i class='icon edit'></i>
-                                Cadastros</a></p>
-                            <p class='bloco hidden categoria'><a href="/importa/categoria/"><i class='icon upload'></i>
-                                Importação</a></p>
-                            {% endif %}
-                            <p class='bloco hidden categoria'><a href="/categoria/consulta/"><i class='icon list'></i>
-                                Relat&oacute;rios</a></p>
+                    <div class='ui center aligned row'>
+                        <div class='ui four wide column '>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="modelo">
+                                    <i class="asterisk icon"></i>
+                                    <div class='content'>
+                                        Modelo
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden modelo'><a href="/modelo/"><i class='icon edit'></i>
+                                        Cadastros</a></p>
+                                    <p class='bloco hidden modelo'><a href="/importa/modelo/"><i
+                                            class='icon upload'></i>
+                                        Importação</a></p>
+                                {% endif %}
+                                <p class='bloco hidden modelo'><a href="/modelo/consulta/"><i class='icon list'></i>
+                                    Relat&oacute;rios</a>
+                                </p>
+                            </div>
                         </div>
-                    </div>
-                    <div class='ui four wide column '>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="cor">
-                                <i class="paint brush icon"></i>
-                                <div class="content">
-                                    Cor
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden cor'><a href="/cor/"><i class='icon edit'></i> Cadastros</a></p>
-                            <p class='bloco hidden cor'><a href="/importa/cor/"><i class='icon upload'></i>Importação</a></p>
-                            {% endif %}
-                            <p class='bloco hidden cor'><a href="/cor/consulta/"><i class='icon list'></i> Relat&oacute;rios</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class='ui center aligned row'>
-                    <div class='ui four wide column'>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="dispositivo">
-                                <i class="tablet icon"></i>
-                                <div class="content">
-                                    Dispositivo
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden dispositivo'><a href="/dispositivo/"><i class='icon edit'></i>
-                                Cadastros</a></p>
-                            {% endif %}
-                            <p class='bloco hidden dispositivo'><a href="/dispositivo/consulta/"><i
-                                class='icon list'></i> Relat&oacute;rios</a></p>
-                        </div>
-                    </div>
-                    <div class='ui four wide column'>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="especie">
-                                <i class="fa fa-truck icone "></i>
-                                <div class="content">
-                                    Esp&eacute;cie
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden especie'><a href="/especie/"><i class='icon edit'></i> Cadastros</a>
-                            </p>
-                            <p class='bloco hidden especie'><a href="/importa/especie/"><i class='icon upload'></i>
-                                Importação</a></p>
-                            {% endif %}
-                            <p class='bloco hidden especie'><a href="/especie/consulta/"><i class='icon list'></i> Relat&oacute;rios</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class='ui four wide column'>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id='infracao'>
-                                <i class="browser icon"></i>
-                                <div class="content">
-                                    Infração
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            <p class='bloco hidden infracao'><a href="/infracao/relatorio/"><i class='icon list'></i>
-                                Relat&oacute;rios</a></p>
-                        </div>
-                    </div>
-                    <div class='ui four wide column'>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="lei">
-                                <i class="legal icon "></i>
-                                <div class="content">
-                                    Legislação
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden lei'><a href="/legislacao/"><i class='icon edit'></i> Cadastros</a>
-                            </p>
-                            {% endif %}
-                            <p class='bloco hidden lei'><a href="/legislacao/consulta/"><i class='icon list'></i> Relat&oacute;rios</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class='ui center aligned row'>
-                    <div class='ui four wide column '>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="modelo">
-                                <i class="asterisk icon"></i>
-                                <div class='content'>
-                                    Modelo
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden modelo'><a href="/modelo/"><i class='icon edit'></i> Cadastros</a></p>
-                            <p class='bloco hidden modelo'><a href="/importa/modelo/"><i class='icon upload'></i>
-                                Importação</a></p>
-                            {% endif %}
-                            <p class='bloco hidden modelo'><a href="/modelo/consulta/"><i class='icon list'></i> Relat&oacute;rios</a>
-                            </p>
-                        </div>
-                    </div>
-                    <div class='ui four wide column '>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="tipoinfracao">
-                                <i class="archive icon"></i>
-                                <div class="content">
-                                    Tipo de Infraç&atilde;o
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden tipoinfracao'><a href="/tipo-infracao/"><i class='icon edit'></i>
-                                Cadastros</a></p>
-                            {% endif %}
-                            <p class='bloco hidden tipoinfracao'><a href="/tipo_infracao/consulta/"><i
-                                    class='icon list'></i> Relat&oacute;rios</a></p>
+                        <div class='ui four wide column '>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="tipoinfracao">
+                                    <i class="archive icon"></i>
+                                    <div class="content">
+                                        Tipo de Infraç&atilde;o
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden tipoinfracao'><a href="/tipo-infracao/"><i
+                                            class='icon edit'></i>
+                                        Cadastros</a></p>
+                                {% endif %}
+                                <p class='bloco hidden tipoinfracao'><a href="/tipo_infracao/consulta/"><i
+                                        class='icon list'></i> Relat&oacute;rios</a></p>
 
-                            
 
+                            </div>
                         </div>
-                    </div>
-                    <div class='ui four wide column '>
-                        <div class='ui segment'>
-                            <h2 class="ui header fazul" id="tipoveiculo">
-                                <i class="fa fa-motorcycle icone"></i>
-                                <div class="content">
-                                    Tipo de Ve&iacute;culo
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden tipoveiculo'><a href="/tipo-veiculo/"><i class='icon edit'></i>
-                                Cadastros</a></p>
-                            <p class='bloco hidden tipoveiculo'><a href="/importa/tipo-veiculo/"><i
-                                class='icon upload'></i> Importação</a></p>
-                            {% endif %}
-                            <p class='bloco hidden tipoveiculo'><a href="/tipo-veiculo/consulta/"><i
-                                class='icon list'></i> Relat&oacute;rios</a></p>
+                        <div class='ui four wide column '>
+                            <div class='ui segment'>
+                                <h2 class="ui header fazul" id="tipoveiculo">
+                                    <i class="fa fa-motorcycle icone"></i>
+                                    <div class="content">
+                                        Tipo de Ve&iacute;culo
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden tipoveiculo'><a href="/tipo-veiculo/"><i
+                                            class='icon edit'></i>
+                                        Cadastros</a></p>
+                                    <p class='bloco hidden tipoveiculo'><a href="/importa/tipo-veiculo/"><i
+                                            class='icon upload'></i> Importação</a></p>
+                                {% endif %}
+                                <p class='bloco hidden tipoveiculo'><a href="/tipo-veiculo/consulta/"><i
+                                        class='icon list'></i> Relat&oacute;rios</a></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class='ui four wide column '>
-                        <div class='ui segment'>
-                            <h2 class="ui header center aligned fazul" id="veiculo">
-                                <i class="fa fa-car icone"></i>
-                                <div class="content">
-                                    Ve&iacute;culo
-                                </div>
-                                <div class='ui divider'></div>
-                            </h2>
-                            {% if perms.global_permissions.permissao_geral %}
-                            <p class='bloco hidden veiculo'><a href="/veiculo/"><i class='icon edit'></i> Cadastros</a>
-                            </p>
-                            <p class='bloco hidden veiculo'><a href="/importa/veiculo/"><i class='icon upload'></i>
-                                Importação</a></p>
-                            {% endif %}
-                            <p class='bloco hidden veiculo'><a href="/veiculo/consulta/"><i class='icon list'></i> Relat&oacute;rios</a>
-                            </p>
+                        <div class='ui four wide column '>
+                            <div class='ui segment'>
+                                <h2 class="ui header center aligned fazul" id="veiculo">
+                                    <i class="fa fa-car icone"></i>
+                                    <div class="content">
+                                        Ve&iacute;culo
+                                    </div>
+                                    <div class='ui divider'></div>
+                                </h2>
+                                {% if perms.global_permissions.permissao_geral %}
+                                    <p class='bloco hidden veiculo'><a href="/veiculo/"><i class='icon edit'></i>
+                                        Cadastros</a>
+                                    </p>
+                                    <p class='bloco hidden veiculo'><a href="/importa/veiculo/"><i
+                                            class='icon upload'></i>
+                                        Importação</a></p>
+                                {% endif %}
+                                <p class='bloco hidden veiculo'><a href="/veiculo/consulta/"><i class='icon list'></i>
+                                    Relat&oacute;rios</a>
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}

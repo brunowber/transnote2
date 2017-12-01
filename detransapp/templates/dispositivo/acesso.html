@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %} Relat&oacute;rio de Dispositivo {% endblock %}
+
+{% block home %}item {% endblock %}
+{% block cadastros %}item {% endblock %}
+{% block relatorios %}item active{% endblock %}
+{% block sobre %}item {% endblock %}
+{% block op1 %} item {% endblock %}
+{% block op2 %} item {% endblock %}
+
+
+{% block result %}
+<div class='ui grid relatorio'>
+    <div class='row'>
+        <div class='three wide column'>
+        </div>
+        <div class='ten wide column'>
+            <h2 class='ui header'>
+                <i class="icon massive tablet"></i>
+                <div class="content">
+                    Relat&oacute;rio de dispositivo
+                    <div class='sub header'>Prencha o campo abaixo para refinar a busca.</div>
+                </div>
+            </h2>
+            <div class="ui fluid form ">
+                <form method="POST" action="{% url 'dispositivo-acesso' %}" class='ui fluid form'>
+                    {% csrf_token %}
+                    <div class="field">
+                        <label>Busca</label>
+                        <input type="text" name="procurar"/>
+                    </div>
+                    <button type="submit" class="ui verde button">Consultar</button>
+                </form>
+                <table class="ui table">
+                    <thead>
+                    <tr>
+                        <th>Identificação</th>
+                        <th>Aceitar</th>
+                        <th>Rejeitar</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for dispositivo in dispositivos %}
+                    <tr>
+                        <td>{{ dispositivo.imei }}</td>
+                        <td><a href="{% url 'cad-acesso' dispositivo.id %}">
+                            <i class="green check circle icon"></i></a></td>
+                        <td><a href="{% url 'remove-acesso' dispositivo.id%}">
+                            <i class="red remove circle icon"></i></a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% include "partials/paginacao.html" with lista=agentes procurar=procurar %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
