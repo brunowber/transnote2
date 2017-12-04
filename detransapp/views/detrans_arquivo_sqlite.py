@@ -44,7 +44,7 @@ class ThreadDetransSqlite(threading.Thread):
             self.progress = 2
             conn = sqliteCipher.connect(self.detrans_sqlite_nome_execucao)
             cursor = conn.cursor()
-            cursor.execute("PRAGMA key='test'")
+            cursor.execute("PRAGMA key='senha_cifra'")
 
             self.progress = 3
             cria_db.criar(conn, cursor)
