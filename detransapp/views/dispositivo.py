@@ -180,9 +180,7 @@ class ConsultaDispositivoAcessoView(View):
             page = int(request.GET.get('page', 1))
         except Exception:
             page = 1
-
-        dispositivoes_page = Acesso.objects.get_page(page, procurar)
-        print dispositivoes_page[0].dt_acesso
+            
         return render(request, self.template_name, {'dispositivos': dispositivoes_page,
                                                     'procurar': procurar})
 
