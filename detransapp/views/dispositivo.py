@@ -181,6 +181,8 @@ class ConsultaDispositivoAcessoView(View):
         except Exception:
             page = 1
             
+        dispositivoes_page = Acesso.objects.get_page(page, procurar)
+         
         return render(request, self.template_name, {'dispositivos': dispositivoes_page,
                                                     'procurar': procurar})
 
