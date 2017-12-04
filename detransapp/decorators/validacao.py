@@ -1,6 +1,7 @@
+import datetime
 from rest_framework import status
 
-from detransapp.models import Dispositivo, Acesso
+from detransapp.models import Dispositivo, Acesso, Agente
 from detransapp.rest import JSONResponse
 
 
@@ -10,12 +11,16 @@ def validar_imei():
             
             if 'imei' in request.POST:
                 print request.POST['imei']
+                print
                 dispositivo = Dispositivo.objects.existe_dispositivo(request.POST['imei'])
-
                 if dispositivo:
                     return view_func(request, *args, **kwargs)
                 else:
-                    Acesso.objects.get_or_create(imei=request.POST['imei'])
+                    acesso = Acesso.objects.get_or_create(imei=request.POST['imei'])[0]
+                    acesso.usuario = Agente.objects.get(id=request.POST['agente']).username
+                    acesso.dt_acesso = datetime.datetime.now()
+                    print "datetime", acesso.dt_acesso
+                    acesso.save()
 
             return JSONResponse({'status': 'Dispositivo nao encontrado!'},
                                 status=status.HTTP_403_FORBIDDEN)

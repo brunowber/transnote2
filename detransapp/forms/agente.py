@@ -57,11 +57,10 @@ class FormAgente(forms.ModelForm):
                     msg = "Nome deve conter apenas letras."
                     self._errors['first_name'] = self.error_class([msg])
         except Exception:
-            print 'excpet'
             msg = 'Este campo é obrigatório.'
             self._errors['first_name'] = self.error_class([msg])
         try:
-            if nome in senha and nome != "":
+            if nome.lower() in senha.lower() and nome != "":
                 msg = 'Seu nome não pode conter na senha.'
                 self._errors['password'] = self.error_class([msg])
         except Exception:
@@ -102,6 +101,8 @@ class FormAgente(forms.ModelForm):
         username = self.cleaned_data['username']
         if len(username) < 8:
             raise forms.ValidationError("Usuário dever conter ao menos 8 dígitos.")
+        print username.lower()
+        return username.lower()
 
     class Meta:
         model = Agente

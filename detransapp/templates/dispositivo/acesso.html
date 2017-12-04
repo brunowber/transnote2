@@ -36,6 +36,8 @@
                     <thead>
                     <tr>
                         <th>Identificação</th>
+                        <th>Data de Acesso</th>
+                        <th>Usuário</th>
                         <th>Aceitar</th>
                         <th>Rejeitar</th>
                     </tr>
@@ -44,6 +46,8 @@
                     {% for dispositivo in dispositivos %}
                     <tr>
                         <td>{{ dispositivo.imei }}</td>
+                        <td>{{ dispositivo.dt_acesso }}</td>
+                        <td>{{ dispositivo.usuario }}</td>
                         <td><a href="{% url 'cad-acesso' dispositivo.id %}">
                             <i class="green check circle icon"></i></a></td>
                         <td><a href="{% url 'remove-acesso' dispositivo.id%}">

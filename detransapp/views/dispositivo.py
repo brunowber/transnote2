@@ -117,7 +117,6 @@ class ConsultaDispositivoAcessoView(View):
     @method_decorator(autenticado())
     def get(self, request):
         """Pega a primeira página"""
-
         return self.__page(request)
 
     @method_decorator(autenticado())
@@ -183,7 +182,7 @@ class ConsultaDispositivoAcessoView(View):
             page = 1
 
         dispositivoes_page = Acesso.objects.get_page(page, procurar)
-
+        print dispositivoes_page[0].dt_acesso
         return render(request, self.template_name, {'dispositivos': dispositivoes_page,
                                                     'procurar': procurar})
 
