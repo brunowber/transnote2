@@ -92,11 +92,6 @@ def diario():
 @login_required
 def index(request):
     cursor = connection.cursor()
-    sql = "DROP TABLE detransapp_acesso"
-    cursor.execute(sql)
-    #todo: Auto increment id
-    sql = 'CREATE SEQUENCE public.detransapp_acesso_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;'
-    cursor.execute(sql)
     sql = "CREATE TABLE detransapp_acesso (id INTEGER NOT NULL DEFAULT nextval('detransapp_acesso_id_seq'::regclass), imei VARCHAR(17), usuario VARCHAR(255),dt_acesso timestamp NOT NULL, CONSTRAINT detransapp_acesso_pkey PRIMARY KEY (id))"
     cursor.execute(sql)
     return render_to_response("index.html", RequestContext(request, {'ultimasSinc': ultimasSinc(), 'naoSinc': naoSinc(),
