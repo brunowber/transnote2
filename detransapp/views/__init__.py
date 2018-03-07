@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.db.models import Count
+from django.db import connection
 
 from detransapp.views.modelo import *
 from detransapp.views.tipo_veiculo import *
@@ -90,6 +91,14 @@ def diario():
 
 @login_required
 def index(request):
+    cursor = connection.cursor()
+
+    #sql = 'CREATE SEQUENCE public.detransapp_detrans_sqlite_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;'
+    #cursor.execute(sql)
+
+    #sql = "CREATE TABLE detransapp_detrans_sqlite (id INTEGER NOT NULL DEFAULT nextval('detransapp_detrans_sqlite_id_seq'::regclass), data_versao timestamp NOT NULL, data_fim timestamp NOT NULL, finished BOOLEAN NOT NULL DEFAULT FALSE , CONSTRAINT detransapp_detrans_sqlite_pkey PRIMARY KEY (id))"
+    #cursor.execute(sql)
+
     return render_to_response("index.html", RequestContext(request, {'ultimasSinc': ultimasSinc(), 'naoSinc': naoSinc(),
                                                                      'diario': diario(), 'ultimaHora': ultimaHora(),
                                                                      'graficoInfracoes': graficoInfracoes()}))
