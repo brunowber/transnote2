@@ -10,6 +10,7 @@ from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from detransapp.forms.agente import FormAgente
+from detransapp.models import Detrans_sqlite
 from detransapp.models.dispositivo import Dispositivo
 from detransapp.models.agente import Agente
 from detransapp.models.agente_login import Agente_login
@@ -113,6 +114,7 @@ class GetAgentesRestView(APIView):
         else:
             agentes = Agente.objects.get_agentes_sicronismo()
         agentes_js = []
+        print type(agentes)
         for agente in agentes:
             serializer = AgenteSerializer(agente)
             agentes_js.append(serializer.data)
@@ -147,6 +149,17 @@ class GetControlLoginRestView(APIView):
     @method_decorator(validar_imei())
     def post(self, request):
         """Verifica no servidor se o agente está logado para permissão"""
+
+        if request.POST['data']:
+            data = str(request.POST['data'])
+            if data != "0":
+                date = data[0:10]
+                date += " " + data[11:19]
+                if date == str(Detrans_sqlite.objects.filter(is_finished=True).last().data_versao)[0:19]:
+                    print "Banco Móvel Atualizado"
+                else:
+                    print "Banco Móvel Desatualizado"
+                    return JSONResponse({'permission': 2})
 
         status = True
         if int(request.POST['status']) == 0:

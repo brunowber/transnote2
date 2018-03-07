@@ -7,10 +7,11 @@ from django.utils.decorators import method_decorator
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from detransapp.forms.config_sinc import FormConfigSinc
-from detransapp.models import ConfigSinc
+from detransapp.models import ConfigSinc, Detrans_sqlite
 from detransapp.decorators import validar_imei, autenticado
 from detransapp.rest import JSONResponse
 from detransapp.serializers import ConfigSincSerializer
+from detransapp.serializers.dados_sqlite import DadosSqliteSerializer
 
 
 class ConfigSincView(View):
@@ -65,3 +66,24 @@ class GetConfigSincRestView(APIView):
         serializer = ConfigSincSerializer(config_sinc)
 
         return JSONResponse(serializer.data)
+
+
+class GetDadosSqliteRestView(APIView):
+    """Pega os arquivos de configuração do servidor no Android"""
+
+    permission_classes = (IsAuthenticated, AllowAny)
+
+    @method_decorator(validar_imei())
+    def post(self, request):
+        """Pega as configurações e envia para o servidor"""
+        if 'data' in request.POST:
+            dados_sqlite = Detrans_sqlite.objects.get_dados_sqlite_sicronismo(request.POST['data'])
+        else:
+            dados_sqlite = Detrans_sqlite.objects.get_dados_sqlite_sicronismo()
+        dados_js = []
+        for dados in dados_sqlite:
+            serializer = DadosSqliteSerializer(dados)
+            dados_js.append(serializer.data)
+        print dados_js
+
+        return JSONResponse(dados_js)

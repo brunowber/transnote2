@@ -31,7 +31,7 @@ def importa(self, conn, cursor, stopthread):
                 raise ValueError('Geração detrans.sqlite cancelada, parada ao importar "Veiculo"')
         if stopthread.isSet():
             raise ValueError('Geração detrans.sqlite cancelada, parada ao importar "Veiculo"')
-        cursor.executemany("INSERT INTO veiculo (renavam, chassi, nr_motor, placa, modelo_codigo, tipo_veiculo_codigo, "
+        cursor.executemany("INSERT   INTO veiculo (renavam, chassi, nr_motor, placa, modelo_codigo, tipo_veiculo_codigo, "
                            "especie_codigo, cidade_codigo, cor_codigo, categoria_codigo, ano_fabricacao, ano_modelo,"
                            "num_passageiro, cidade_codigo) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", tupla_veiculos)
         conn.commit()

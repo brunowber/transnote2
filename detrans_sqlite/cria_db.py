@@ -109,6 +109,9 @@ def criar(conn, cursor):
     cursor.execute("create table if not exists config_det ("
                     + "id integer primary key autoincrement, "
                     + "autuador VARCHAR(15))")
-                   
+
+    cursor.execute("create table if not exists dados_sqlite ("
+                   + "id integer primary key autoincrement, "
+                   + "data_versao VARCHAR(20))")
 
     conn.commit()

@@ -26,7 +26,7 @@ article{
     margin-bottom: 10%;
 }
 footer{
-    min-height:20%;
+   min-height:20%;
    bottom:0;
    width:100%;
    height:auto;
@@ -352,7 +352,6 @@ footer.ui.stackable.grid{
 }
 
 footer figure{
-
     margin: 0;
     margin-left: 5em;
 }
@@ -409,7 +408,8 @@ figure.fabrica{
     margin-top: 0% !important;
     z-index:99 !important;
 }}
-/*@media (min-width: 600px) and (max-width: 768px) {.texto{font-size: 0.2em;}.diminuir{font-size: 0.35em;}}*/
-/*@media (min-width: 550px) and (max-width: 599px) {.texto{font-size: 0.1em;  }.diminuir{font-size: 0.25em;}}*/
-/*@media (min-width: 401px) and (max-width: 549px) {.texto{font-size: 0.1em;  }.diminuir{font-size: 0.3em;}}*/
-/*@media (min-width: 1px) and (max-width: 400px) {.texto{font-size: 0.1em;  }.sumir{visibility:hidden;}.diminuir{font-size: 0.09em;}}*/
+@media (min-width: 1px) and (max-width: 768px) {
+    .ui.large.menu .item {
+        font-size: 1.0rem !important;
+    }
+}

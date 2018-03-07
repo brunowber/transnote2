@@ -13,6 +13,7 @@ from detrans_sqlite.importa import *
 from detrans_sqlite import cria_db
 from django.utils.decorators import method_decorator
 from detransapp.decorators import permissao_geral_required
+from detransapp.models.detrans_sqlite import Detrans_sqlite
 
 
 class ThreadDetransSqlite(threading.Thread):
@@ -29,6 +30,9 @@ class ThreadDetransSqlite(threading.Thread):
         self.progress = 0
         self.detrans_sqlite_nome = settings.MEDIA_ROOT + '/detrans.sqlite'
         self.detrans_sqlite_nome_execucao = settings.MEDIA_ROOT + '/detrans_execucao.sqlite'
+        self.detrans_sqlite = Detrans_sqlite.objects.create()
+        self.detrans_sqlite.data_versao = datetime.now()
+        self.detrans_sqlite.usuario = "usuario"
 
     def run(self):
 
@@ -59,12 +63,14 @@ class ThreadDetransSqlite(threading.Thread):
             self.progress = 6
             categoria.importa(conn, cursor, self.stopthread)
             self.progress = 7
-            cor.importa(conn, cursor, self.stopthread)
+            criacao_dados.importa(conn, cursor, self.stopthread)
             self.progress = 8
-            especie.importa(conn, cursor, self.stopthread)
+            cor.importa(conn, cursor, self.stopthread)
             self.progress = 9
-            lei.importa(conn, cursor, self.stopthread)
+            especie.importa(conn, cursor, self.stopthread)
             self.progress = 10
+            lei.importa(conn, cursor, self.stopthread)
+            self.progress = 11
             tipo_infracao.importa(conn, cursor, self.stopthread)
             self.progress = 13
             tipo_veiculo.importa(conn, cursor, self.stopthread)
@@ -101,12 +107,16 @@ class ThreadDetransSqlite(threading.Thread):
             self.is_finalisado = True
             self.is_erro_processo = False
             self.is_cancelado = False
+            self.detrans_sqlite.is_finished = True
 
         except Exception:
             self.is_finalisado = True
             self.is_erro_processo = True
+
         finally:
             self.is_finalisado = True
+            self.detrans_sqlite.data_fim = datetime.now()
+            self.detrans_sqlite.save()
 
     def stop(self):
         self.is_finalisado = False
@@ -135,7 +145,8 @@ class CriaSqliteView(View):
 
     @method_decorator(permissao_geral_required())
     def get(self, request):
-        return render(request, self.template)
+        detrans_sqlite = Detrans_sqlite.objects.filter(is_finished=True).last()
+        return render(request, self.template, {'sqlite': detrans_sqlite})
 
     @method_decorator(permissao_geral_required())
     def post(self, request):
@@ -145,6 +156,7 @@ class CriaSqliteView(View):
         myProcess.start()
 
         return redirect('status-sqlite')
+
 
 class CriaSqliteCanceladoView(View):
     template = 'detrans_sqlite/cria_sqlite_cancelado.html'
@@ -161,6 +173,7 @@ class CriaSqliteCanceladoView(View):
         myProcess.start()
 
         return redirect('status-sqlite')
+
 
 class StatusView(View):
     template = 'detrans_sqlite/status_sqlite.html'

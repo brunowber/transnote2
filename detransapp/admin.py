@@ -2,12 +2,11 @@
 
 from django.contrib import admin
 
-from detransapp.models import Cidade, Veiculo,\
-    Infracao, Infrator, Agente, Movimentacao, TipoVeiculo,\
-    TipoInfracao, Dispositivo, Sistema, Lei, Especie, Categoria, UF,\
-    Configuracao_DET, Regiao, Modelo, Cor, DET, Agente_login, Bloco,\
-    BlocoPadrao, ConfigSinc, VeiculoEditado, Acesso
-
+from detransapp.models import Cidade, Veiculo, \
+    Infracao, Infrator, Agente, Movimentacao, TipoVeiculo, \
+    TipoInfracao, Dispositivo, Sistema, Lei, Especie, Categoria, UF, \
+    Configuracao_DET, Regiao, Modelo, Cor, DET, Agente_login, Bloco, \
+    BlocoPadrao, ConfigSinc, VeiculoEditado, Acesso, Detrans_sqlite
 
 admin.site.register(Cidade)
 admin.site.register(Veiculo)
@@ -34,3 +33,4 @@ admin.site.register(ConfigSinc)
 admin.site.register(BlocoPadrao)
 admin.site.register(VeiculoEditado)
 admin.site.register(Acesso)
+admin.site.register(Detrans_sqlite)

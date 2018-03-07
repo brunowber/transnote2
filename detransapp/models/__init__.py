@@ -9,6 +9,7 @@ from detransapp.models.cidade import Cidade
 from detransapp.models.cor import Cor
 from detransapp.models.dispositivo import Dispositivo
 from detransapp.models.acesso import Acesso
+from detransapp.models.detrans_sqlite import Detrans_sqlite
 from detransapp.models.especie import Especie
 from detransapp.models.infracao import Infracao
 from detransapp.models.infrator import Infrator

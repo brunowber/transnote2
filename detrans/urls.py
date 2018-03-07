@@ -25,7 +25,7 @@ from detransapp.views import settings, CadastroLeisView, \
     ImportaEspecie, ImportaCidade, ImportaTipoVeiculo, ImportaModelo, \
     ImportaVeiculo, CriaSqliteView, CriaSqliteCanceladoView, StatusView, \
     CadastroDETView, ConsultaDETView, GeraDet, ConfigSincView, TemplateDET, ConsultaDispositivoAcessoView, \
-    CadastroDispositivoAcessoView, RemoveDispositivoAcessoView
+    CadastroDispositivoAcessoView, RemoveDispositivoAcessoView, GetDadosSqliteRestView
 
 from detransapp.views.infracao import GetImageRestView
 
@@ -193,6 +193,8 @@ urlpatterns = patterns('',
                            name='rest-especies'),
                        url(r'^rest/categoria/$', GetCategoriasRestView.as_view(),
                            name='rest-categorias'),
+                       url(r'^rest/dados-sqlite/$', GetDadosSqliteRestView.as_view(),
+                           name='rest-dados-sqlite'),
                        url(r'^rest/cor/$', GetCoresRestView.as_view(),
                            name='rest-cores'),
                        url(r'^rest/regiao/$', GetRegioesRestView.as_view(),

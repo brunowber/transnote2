@@ -1,3 +1,5 @@
+# coding: utf-8
+
 import datetime
 from rest_framework import status
 
@@ -20,6 +22,7 @@ def validar_imei():
                         acesso.usuario = Agente.objects.get(username=request.POST['username']).username
                     acesso.dt_acesso = datetime.datetime.now()
                     acesso.save()
+
             return JSONResponse({'status': 'Dispositivo nao encontrado!'},
                                 status=status.HTTP_403_FORBIDDEN)
 
