@@ -9,7 +9,7 @@ from django.utils.decorators import method_decorator
 from django.utils import timezone
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from detransapp.forms.agente import FormAgente
+from detransapp.forms.agente import FormAgente, FormAgenteEdit
 from detransapp.models import Detrans_sqlite
 from detransapp.models.dispositivo import Dispositivo
 from detransapp.models.agente import Agente
@@ -31,7 +31,7 @@ class CadastroAgenteView(View):
 
         if agente_id:
             agente = Agente.objects.get(pk=agente_id)
-            form = FormAgente(instance=agente)
+            form = FormAgenteEdit(instance=agente)
         else:
             form = FormAgente()
 
@@ -43,7 +43,7 @@ class CadastroAgenteView(View):
 
         if agente_id:
             agente = Agente.objects.get(pk=agente_id)
-            form = FormAgente(instance=agente, data=request.POST)
+            form = FormAgenteEdit(instance=agente, data=request.POST)
         else:
             form = FormAgente(request.POST)
         if form.is_valid():
