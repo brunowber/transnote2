@@ -145,18 +145,18 @@ class FormAgenteEdit(forms.ModelForm):
                     if len(cpf) != 11:
                         msg = "CPF possui exatamente 11 digítos."
                         self._errors['cpf'] = self.error_class([msg])
-                        raise forms.ValidationError("")
-                    d1 = 0
-                    d2 = 0
-                    i = 0
-                    while i < 10:
-                        d1, d2, i = (d1 + (int(cpf[i]) * (11 - i - 1))) % 11 if i < 9 else d1, (
-                            d2 + (int(cpf[i]) * (11 - i))) % 11, i + 1
-                    if not (
-                        (int(cpf[9]) == (11 - d1 if d1 > 1 else 0)) and (int(cpf[10]) == (11 - d2 if d2 > 1 else 0))):
-                        raise forms.ValidationError("CPF inválido")
+                d1 = 0
+                d2 = 0
+                i = 0
+                print "aqui"
+                while i < 10:
+                    d1, d2, i = (d1 + (int(cpf[i]) * (11 - i - 1))) % 11 if i < 9 else d1, (
+                        d2 + (int(cpf[i]) * (11 - i))) % 11, i + 1
+                if not ((int(cpf[9]) == (11 - d1 if d1 > 1 else 0)) and (int(cpf[10]) == (11 - d2 if d2 > 1 else 0))):
+                    msg = "CPF inválido."
+                    self._errors['cpf'] = self.error_class([msg])
         except Exception:
-            print "passou"
+            print "Erro CPF"
 
         try:
             username = self.cleaned_data['username']
@@ -170,16 +170,7 @@ class FormAgenteEdit(forms.ModelForm):
                     msg = "Usuário dever conter ao menos 8 dígitos."
                     self._errors['username'] = self.error_class([msg])
         except Exception:
-            print "passou"
-
-        try:
-            cpf = self.cleaned_data['cpf']
-            if agente.cpf != cpf:
-                if Agente.objects.filter(cpf=cpf).exists():
-                    msg = "Esse CPF já está em uso."
-                    self._errors['cpf'] = self.error_class([msg])
-        except Exception:
-            print "passou"
+            print "Erro username"
 
         try:
             senha = self.cleaned_data['password']
