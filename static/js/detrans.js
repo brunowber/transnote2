@@ -82,4 +82,10 @@
         $('.'+id).transition('slide down')
     })
 
+    $(' .message .close').click(function () {
+
+        $(this).parent().fadeOut();
+
+    });
+
   })

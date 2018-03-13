@@ -1,6 +1,6 @@
 # coding: utf-8
 """CRUD de tipo de veiculos"""
-
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -34,14 +34,16 @@ class CadastroTipoView(View):
         if tipo_id:
             tipo = TipoVeiculo.objects.get(pk=tipo_id)
             form = FormTipoVeiculo(instance=tipo, data=request.POST)
+            mensagem = 'Tipo veiculo editado com sucesso!'
         else:
-
             form = FormTipoVeiculo(request.POST)
+            mensagem = 'Tipo veiculo inserido com sucesso!'
 
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/tipo-veiculo/consulta/')
 
         return render(request, self.template, {'form': form})
 

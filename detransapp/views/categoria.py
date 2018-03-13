@@ -1,6 +1,6 @@
 # coding: utf-8
 """Cadastra e atualiza as categorias"""
-
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -38,14 +38,17 @@ class CadastroCategoriaView(View):
         if categoria_id:
             categoria = Categoria.objects.get(pk=categoria_id)
             form = FormCategoria(instance=categoria, data=request.POST)
+            mensagem = 'Categoria editada com sucesso!'
         else:
 
             form = FormCategoria(request.POST)
+            mensagem = 'Categoria criada com sucesso!'
 
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/categoria/consulta/')
 
         return render(request, self.template, {'form': form})
 

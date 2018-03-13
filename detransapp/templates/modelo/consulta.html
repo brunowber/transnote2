@@ -11,49 +11,61 @@
 
 
 {% block result %}
-<div class='ui grid relatorio'>
-    <div class='row'>
-        <div class='three wide column'>
-        </div>
-        <div class='ten wide column'>
-            <h2 class='ui header'>
-                <i class="asterisk icon"></i>
-                <div class="content">
-                    Relat&oacute;rio de Modelo
-                    <div class='sub header'>Prencha os campos abaixo para refinar a busca.</div>
-                </div>
-            </h2>
-            <div class="ui fluid form">
-                <form method="POST" action="{% url 'modelo-consulta' %}">
-                    {% csrf_token %}
-                    <div class='field'>
-                        <label>Busca</label>
-                        <input type="text" name="procurar"/>
+
+    <div class='ui grid relatorio'>
+        <div class='row'>
+            <div class='three wide column'>
+            </div>
+            <div class='ten wide column'>
+                <h2 class='ui header'>
+                    <i class="asterisk icon"></i>
+                    <div class="content">
+                        Relat&oacute;rio de Modelo
+                        <div class='sub header'>Prencha os campos abaixo para refinar a busca.</div>
                     </div>
-                    <button type="submit" class="ui verde button">Consultar</button>
-                </form>
-                <table class="ui table">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Marca</th>
-                        <th>Editar</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for modelo in modelos %}
-                    <tr>
-                        <td>{{ modelo.codigo }}</td>
-                        <td>{{ modelo.descricao }}</td>
-                        <td><a href="{% url 'cad-modelo' modelo.codigo %}"><i class='icon configure'></i>Editar</a></td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                {% include "partials/paginacao.html" with lista=modelos procurar=procurar %}
+                </h2>
+
+                {% if messages %}
+                    <ul class="ui info message success">
+                    <i class="close icon"></i>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <div class="ui fluid form">
+                    <form method="POST" action="{% url 'modelo-consulta' %}">
+                        {% csrf_token %}
+                        <div class='field'>
+                            <label>Busca</label>
+                            <input type="text" name="procurar"/>
+                        </div>
+                        <button type="submit" class="ui verde button">Consultar</button>
+                    </form>
+                    <table class="ui table">
+                        <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Marca</th>
+                            <th>Editar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for modelo in modelos %}
+                            <tr>
+                                <td>{{ modelo.codigo }}</td>
+                                <td>{{ modelo.descricao }}</td>
+                                <td><a href="{% url 'cad-modelo' modelo.codigo %}"><i class='icon configure'></i>Editar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include "partials/paginacao.html" with lista=modelos procurar=procurar %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}

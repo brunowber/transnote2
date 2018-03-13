@@ -92,11 +92,11 @@ def diario():
 @login_required
 def index(request):
 
-    #cursor = connection.cursor()
+    cursor = connection.cursor()
 
-    #sql = 'CREATE SEQUENCE public.detransapp_acesso_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;'
+    #sql = 'CREATE SEQUENCE public.detransapp_detrans_sqlite_id_seq INCREMENT 1 MINVALUE 1 MAXVALUE 9223372036854775807 START 1 CACHE 1;'
     #cursor.execute(sql)
-    #sql = "CREATE TABLE detransapp_acesso (id INTEGER NOT NULL DEFAULT nextval('detransapp_acesso_id_seq'::regclass), imei CHAR NOT NULL, dt_acesso timestamp NOT NULL, usuario CHAR NOT NULL , CONSTRAINT detransapp_acesso_pkey PRIMARY KEY (id))"
+    # sql = "CREATE TABLE detransapp_detrans_sqlite (id INTEGER NOT NULL DEFAULT nextval('detransapp_detrans_sqlite_id_seq'::regclass), data_versao CHAR NOT NULL, dt_acesso timestamp NOT NULL, usuario CHAR NOT NULL , CONSTRAINT detransapp_acesso_pkey PRIMARY KEY (id))"
     #sql = "CREATE TABLE detransapp_detrans_sqlite (id INTEGER NOT NULL DEFAULT nextval('detransapp_detrans_sqlite_id_seq'::regclass), data_versao timestamp NOT NULL, data_fim timestamp NOT NULL, finished BOOLEAN NOT NULL DEFAULT FALSE , CONSTRAINT detransapp_detrans_sqlite_pkey PRIMARY KEY (id))"
     #cursor.execute(sql)
 

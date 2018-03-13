@@ -1,6 +1,6 @@
 # coding: utf-8
 """View para gerar os blocos"""
-
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -42,10 +42,12 @@ class CadastroBlocoView(View):
             bloco_padrao = BlocoPadrao.objects.get(pk=bloco_id)
             form = FormBloco(instance=bloco_padrao, data=request.POST)
             is_input = False
+            mensagem = 'Bloco editado com sucesso!'
 
         else:
 
             form = FormBloco(request.POST)
+            mensagem = 'Bloco criado com sucesso!'
 
         if form.is_valid():
 
@@ -70,7 +72,8 @@ class CadastroBlocoView(View):
 
                 form.save()
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/bloco/consulta/')
 
         return render(request, self.template, {'form': form})
 

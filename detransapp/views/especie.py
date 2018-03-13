@@ -1,5 +1,6 @@
 # coding: utf-8
 """CRUD de espécies"""
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -37,13 +38,17 @@ class CadastroEspecieView(View):
         if especie_id:
             especie = Especie.objects.get(pk=especie_id)
             form = FormEspecie(instance=especie, data=request.POST)
+            mensagem = 'Espécie editada com sucesso!'
         else:
+
             form = FormEspecie(request.POST)
+            mensagem = 'Espécie inserida com sucesso!'
 
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/especie/consulta/')
 
         return render(request, self.template, {'form': form})
 

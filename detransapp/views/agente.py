@@ -1,6 +1,6 @@
 # coding: utf-8
 """View sobre os agentes"""
-
+from django.contrib import messages
 from django.contrib.auth import authenticate
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
@@ -44,8 +44,11 @@ class CadastroAgenteView(View):
         if agente_id:
             agente = Agente.objects.get(pk=agente_id)
             form = FormAgenteEdit(instance=agente, data=request.POST)
+            mensagem = 'Edição do agente com sucesso!'
+
         else:
             form = FormAgente(request.POST)
+            mensagem = 'Agente criado com sucesso!'
         if form.is_valid():
             form.is_active = True
             agente = form.save()
@@ -56,7 +59,8 @@ class CadastroAgenteView(View):
             else:
                 agente.user_permissions.remove(permission)
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/agente/consulta/')
 
         return render(request, self.template, {'form': form})
 

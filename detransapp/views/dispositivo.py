@@ -1,5 +1,6 @@
 # coding: utf-8
 """Arquivo para cadastrar dipositivo"""
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -31,14 +32,17 @@ class CadastroDispositivoView(View):
         if dispositivo_id:
             dispositivo = Dispositivo.objects.get(pk=dispositivo_id)
             form = FormDispositivo(instance=dispositivo, data=request.POST)
+            mensagem = 'Dispositivo editado com sucesso!'
         else:
 
             form = FormDispositivo(request.POST)
+            mensagem = 'Dispositivo inserido com sucesso!'
 
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/dispositivo/consulta/')
 
         return render(request, self.template, {'form': form})
 

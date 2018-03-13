@@ -11,47 +11,58 @@
 
 
 {% block result %}
-<div class='ui grid relatorio'>
-    <div class='row'>
-        <div class='three wide column'>
-        </div>
-        <div class='ten wide column'>
-            <h2 class='ui header'>
-                <i class="fa fa-motorcycle icone"></i> Relat&oacute;rio de Tipos de ve&iacute;culos
-                <div class='sub header'>Prencha os campos abaixo para refinar a busca.</div>
-            </h2>
-            <div class="ui fluid form">
-                <form method="POST" action="{% url 'tipo-veiculo-consulta' %}">
-                    {% csrf_token %}
-                    <div class='field'>
-                        <label>Busca</label>
-                        <input type="text" name="procurar"/>
-                    </div>
-                    <button type="submit" class="ui verde button">Consultar</button>
-                </form>
-                <table class="ui table">
-                    <thead>
-                    <tr>
-                        <th>C&oacute;digo</th>
-                        <th>Tipo</th>
-                        <th>Editar</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for tipo in tipos %}
-                    <tr>
-                        <td>{{ tipo.codigo }}</td>
-                        <td>{{ tipo.descricao }}</td>
-                        <td><a href="{% url 'cad-tipo-veiculo' tipo.codigo %}"><i class='icon configure'></i>Editar</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                {% include "partials/paginacao.html" with lista=tipos procurar=procurar %}
+
+    <div class='ui grid relatorio'>
+        <div class='row'>
+            <div class='three wide column'>
+            </div>
+            <div class='ten wide column'>
+                <h2 class='ui header'>
+                    <i class="fa fa-motorcycle icone"></i> Relat&oacute;rio de Tipos de ve&iacute;culos
+                    <div class='sub header'>Prencha os campos abaixo para refinar a busca.</div>
+                </h2>
+
+                {% if messages %}
+                    <ul class="ui info message success">
+                    <i class="close icon"></i>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                <div class="ui fluid form">
+                    <form method="POST" action="{% url 'tipo-veiculo-consulta' %}">
+                        {% csrf_token %}
+                        <div class='field'>
+                            <label>Busca</label>
+                            <input type="text" name="procurar"/>
+                        </div>
+                        <button type="submit" class="ui verde button">Consultar</button>
+                    </form>
+                    <table class="ui table">
+                        <thead>
+                        <tr>
+                            <th>C&oacute;digo</th>
+                            <th>Tipo</th>
+                            <th>Editar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for tipo in tipos %}
+                            <tr>
+                                <td>{{ tipo.codigo }}</td>
+                                <td>{{ tipo.descricao }}</td>
+                                <td><a href="{% url 'cad-tipo-veiculo' tipo.codigo %}"><i class='icon configure'></i>Editar</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include "partials/paginacao.html" with lista=tipos procurar=procurar %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}

@@ -1,5 +1,6 @@
 # coding: utf-8
 """CRUD de cores"""
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -37,13 +38,16 @@ class CadastroCorView(View):
         if cor_id:
             cor = Cor.objects.get(pk=cor_id)
             form = FormCor(instance=cor, data=request.POST)
+            mensagem = 'Cor editada com sucesso!'
         else:
             form = FormCor(request.POST)
+            mensagem = 'Cor inserida com sucesso!'
 
         if form.is_valid():
             form.save(request)
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/cor/consulta/')
 
         return render(request, self.template, {'form': form})
 

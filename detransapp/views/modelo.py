@@ -1,5 +1,6 @@
 # coding: utf-8
 """CRUD de modelo"""
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -36,14 +37,17 @@ class CadastroModeloView(View):
 
             modelo = Modelo.objects.get(pk=modelo_id)
             form = FormModelo(instance=modelo, data=request.POST)
+            mensagem = 'Modelo editado com sucesso!'
         else:
 
             form = FormModelo(request.POST)
+            mensagem = 'Modelo inserido com sucesso!'
 
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/modelo/consulta/')
 
         return render(request, self.template, {'form': form})
 

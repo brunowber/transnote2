@@ -10,6 +10,7 @@
 {% block op2 %} item {% endblock %}
 
 {% block result %}
+
 <div class='ui grid relatorio'>
     <div class='row'>
         <div class='three wide column'>
@@ -21,6 +22,16 @@
                     Relat&oacute;rio de Blocos
                 </div>
             </h2>
+
+            {% if messages %}
+                <ul class="ui info message success">
+                <i class="close icon"></i>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
             <div class="ui fluid form">
                 <form method="POST" action="{% url 'bloco-consulta' %}">
                     {% csrf_token %}

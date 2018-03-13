@@ -1,12 +1,11 @@
 # coding: utf-8
-
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
 from detransapp.forms.lei import FormLei
 from detransapp.models.lei import Lei
 from detransapp.decorators import permissao_geral_required, autenticado
-
 
 
 class CadastroLeisView(View):
@@ -29,14 +28,16 @@ class CadastroLeisView(View):
         if condutor_id:
             leis = Lei.objects.get(pk=condutor_id)
             form = FormLei(instance=leis, data=request.POST)
+            mensagem = 'Lei editada com sucesso!'
         else:
-
             form = FormLei(request.POST)
+            mensagem = 'Lei inserida com sucesso!'
 
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/legislacao/consulta/')
 
         return render(request, self.template, {'form': form})
 

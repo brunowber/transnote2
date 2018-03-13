@@ -2,6 +2,7 @@
 """CRUD para veiculos"""
 
 import chardet
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -37,12 +38,15 @@ class CadastroVeiculoView(View):
         if veiculo_id:
             veiculo = Veiculo.objects.get(renavam=veiculo_id)
             form = FormEditarVeiculo(request.POST['uf'], data=request.POST, instance=veiculo)
+            mensagem = 'Veiculo editado com sucesso!'
         else:
             form = FormVeiculo(request.POST['uf'], request.POST)
+            mensagem = 'Veiculo inserido com sucesso!'
 
         if form.is_valid():
             form.save()
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/veiculo/consulta/')
 
         return render(request, self.template, {'form': form})
 

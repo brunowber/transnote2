@@ -2,6 +2,7 @@
 """CRUD para tipos de infração"""
 import os
 
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.utils.decorators import method_decorator
@@ -38,15 +39,16 @@ class CadastroTipoInfracaoView(View):
         if tipo_infracao_id:
             tipo_infracao = TipoInfracao.objects.get(pk=tipo_infracao_id)
             form = FormTipoInfracao(request.POST, instance=tipo_infracao)
-
+            mensagem = 'Tipo de infração editado com sucesso!'
         else:
-
             form = FormTipoInfracao(request.POST)
+            mensagem = 'Tipo de infração inserido com sucesso!'
 
         if form.is_valid():
             form.save()
 
-            return redirect('/')
+            messages.success(request, mensagem)
+            return redirect('/tipo_infracao/consulta/')
 
         return render(request, self.template, {'form': form})
 

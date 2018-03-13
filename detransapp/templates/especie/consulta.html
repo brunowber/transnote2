@@ -10,44 +10,55 @@
 {% block op2 %} item {% endblock %}
 
 {% block result %}
-<div class='ui grid relatorio'>
-    <div class='row'>
-        <div class='three wide column'>
-        </div>
-        <div class='ten wide column'>
-            <h2 class='ui header'>
-                <i class="fa fa-truck icone"></i>Relatório de Esp&eacute;cie
-                <div class='sub header'>Prencha os campos abaixo.</div>
-            </h2>
-            <div class="ui fluid form">
-                <form method="POST" action="{% url 'especie-consulta' %}">
-                    {% csrf_token %}
-                    <div class='field'>
-                        <label>Busca</label>
-                        <input type="text" name="procurar"/>
-                    </div>
-                    <button type="submit" class="ui verde button">Consultar</button>
-                </form>
-                <table class="ui table">
-                    <thead>
-                    <tr>
-                        <th>Especie</th>
-                        <th>Editar</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for especie in especies %}
-                        <tr>
-                            <td> {{ especie.descricao }}</td>
-                             <td><a href="{% url 'cad-especie' especie.codigo %}"><i class='fa fa-plus-square icon'></i>Editar</a></td>                           
-                        </tr>
+
+    <div class='ui grid relatorio'>
+        <div class='row'>
+            <div class='three wide column'>
+            </div>
+            <div class='ten wide column'>
+                <h2 class='ui header'>
+                    <i class="fa fa-truck icone"></i>Relatório de Esp&eacute;cie
+                    <div class='sub header'>Prencha os campos abaixo.</div>
+                </h2>
+                {% if messages %}
+                    <ul class="ui info message success">
+                    <i class="close icon"></i>
+                        {% for message in messages %}
+                            <li>{{ message }}</li>
                         {% endfor %}
-                    </tbody>
-                </table>
-                {% include "partials/paginacao.html" with lista=especies procurar=procurar %}
+                    </ul>
+                {% endif %}
+
+                <div class="ui fluid form">
+                    <form method="POST" action="{% url 'especie-consulta' %}">
+                        {% csrf_token %}
+                        <div class='field'>
+                            <label>Busca</label>
+                            <input type="text" name="procurar"/>
+                        </div>
+                        <button type="submit" class="ui verde button">Consultar</button>
+                    </form>
+                    <table class="ui table">
+                        <thead>
+                        <tr>
+                            <th>Especie</th>
+                            <th>Editar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for especie in especies %}
+                            <tr>
+                                <td> {{ especie.descricao }}</td>
+                                <td><a href="{% url 'cad-especie' especie.codigo %}"><i
+                                        class='fa fa-plus-square icon'></i>Editar</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% include "partials/paginacao.html" with lista=especies procurar=procurar %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}
