@@ -21,10 +21,12 @@ class UploadDetransLogoView(View):
             sistema_id = sistema.id
 
         if sistema_id:
+            print 'aqui'
             sistema = Sistema.objects.get(pk=sistema_id)
             form = LogoForm(instance=sistema)
 
         else:
+            print 'else'
             form = LogoForm()
 
         return render(request, self.template, {'form': form})
@@ -36,14 +38,21 @@ class UploadDetransLogoView(View):
         sistema = Sistema.objects.filter()
         arquivos = ['jpg', 'jpeg', 'JPG', 'JPEG', 'png', 'PNG']
         if len(sistema) > 0:
-            sistema_id = sistema[0].id
-            sistema = Sistema.objects.get(pk=sistema_id)
-            form = LogoForm(request.POST or None, request.FILES or None, instance=sistema)
+            if not request.FILES:
+                sistema_id = Sistema.objects.latest('id').id
+                sistema = Sistema.objects.get(pk=sistema_id)
+                form = LogoForm(request.POST or None, request.FILES or None, instance=sistema)
+                form.logo = sistema.logo
+            else:
+                sistema_id = Sistema.objects.latest('id').id
+                sistema = Sistema.objects.get(pk=sistema_id)
+                form = LogoForm(request.POST or None, request.FILES or None, instance=sistema)
         else:
             form = LogoForm(request.POST or None, request.FILES or None)
-        if 'logo' in request.FILES and str(request.FILES['logo']).split('.')[-1] in arquivos:
+        if sistema.logo or 'logo' in request.FILES and str(request.FILES['logo']).split('.')[-1] in arquivos:
+            print 'if'
             if form not in globals():
-                form = LogoForm(request.POST or None, request.FILES or None)
+                form = LogoForm(request.POST or None, request.FILES or None, instance=sistema)
             if form.is_valid():
                 form.save(request)
                 return redirect('/')
@@ -51,5 +60,5 @@ class UploadDetransLogoView(View):
                 return render(request, self.template, {'form': form})
         else:
             if form not in globals():
-                form = LogoForm(instance=sistema)
+                form = LogoForm(instance=Sistema.objects.latest('id'))
             return render(request, self.template, {'form': form, 'erro': 'erro'})
